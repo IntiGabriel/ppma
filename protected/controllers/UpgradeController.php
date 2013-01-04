@@ -104,6 +104,16 @@ class UpgradeController extends Controller
         return $version >= '350000000';
     }
 
+    /**
+     * @return boolean
+     */
+    protected function _is0_3_5_1Installed()
+    {
+        $version = str_replace('.', '', Yii::app()->params['version']);
+        $version = str_pad($version, 10, 0, STR_PAD_RIGHT);
+
+        return $version >= '351000000';
+    }
     
     /**
      * @return void
@@ -333,8 +343,7 @@ class UpgradeController extends Controller
     {
         if ($this->_is0_3_5Installed())
         {
-            Yii::app()->user->setFlash('failure', true);
-            $this->redirect(array('index'));
+            $this->redirect(array('index', 'version' => '0.3.5.1'));
             Yii::app()->end();
         }
 
@@ -362,6 +371,28 @@ class UpgradeController extends Controller
 
         Yii::app()->user->setFlash('version', $config['version']);
         $this->redirect(array('/upgrade/success'));
+    }
+
+
+    /**
+     * @return void
+     */
+    protected function _upgradeTo0_3_5_1()
+    {
+        if ($this->_is0_3_5_1Installed())
+        {
+            Yii::app()->user->setFlash('failure', true);
+            $this->redirect(array('index'));
+            Yii::app()->end();
+        }
+
+        // update config
+        $path = Yii::getPathOfAlias('application.config.ppma') . '.php';
+        $config = new CConfiguration(require($path));
+        $config['version'] = '0.3.5.1';
+        file_put_contents($path, "<?php\n\nreturn " . $config->saveAsString() . ';');
+
+        $this->refresh();
     }
 
 
