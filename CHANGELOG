@@ -1,9 +1,10 @@
 PHP Password Manager (ppma) Change Log
 ======================================
 
-Version 0.3.6
+Version 0.3.5.1
 -------------
 - New: Added installation guide
+- Bug #6: Using of non existing file /css/setup.css
 
 Version 0.3.5
 -------------
