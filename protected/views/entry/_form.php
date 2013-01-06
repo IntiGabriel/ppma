@@ -2,7 +2,8 @@
     /* @var Entry $model */
     /* @var CActiveForm $form */
 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-password.js')
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-password.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/generate-password.js');
 ?>
 
 <?php $form = $this->beginWidget('ActiveForm', array(
@@ -22,11 +23,14 @@
 
     <?php echo $form->labelEx($model, 'password'); ?>
     <div class="row collapse">
-        <div class="eleven columns">
+        <div class="ten columns">
             <?php echo $form->passwordField($model, 'password'); ?>
         </div>
         <div class="one columns">
-            <a class="postfix button secondary expand show-hide-password"><i class="foundicon-access-eyeball"></i></a>
+            <a class="postfix first button secondary expand generate-password"><i class="foundicon-access-key"></i></a>
+        </div>
+        <div class="one columns">
+            <a class="postfix second button secondary expand show-hide-password"><i class="foundicon-access-eyeball"></i></a>
         </div>
     </div>
     <?php echo $form->error($model, 'password'); ?>

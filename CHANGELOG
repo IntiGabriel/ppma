@@ -4,37 +4,38 @@ PHP Password Manager (ppma) Change Log
 Version 0.3.6
 =============
 - Bug: Setting positions for sidebar widgets doesn't work if number of widgets is != 3
+- New #7: Added password generator
 
 Version 0.3.5.1
 -------------
-- New: Added installation guide
 - Bug #6: Using of non existing file /css/setup.css
+- New: Added installation guide
 
 Version 0.3.5
 -------------
-- Chg: Upgraded jQuery UI to version 1.9.2
 - Bug: Quicksearch doesn't work with entries which have no tags
+- Chg: Upgraded jQuery UI to version 1.9.2
 - New: Added drag-and-drop feature for sidebar
 - New: Added export to CSV
 - New: Added import from CSV
 
 Version 0.3.4
 -------------
-- New #1: Added widget to sidebar that shows the most viewed entries
 - Chg: Upgraded Foundation to version 3.2
 - Enh: Optimized the upgrade routine
+- New #1: Added widget to sidebar that shows the most viewed entries
 
 Version 0.3.3
 -------------
-- New: Added widget to sidebar that shows the recent entries
+- Bug: #3 can't install, won't create database tables
 - Chg: Removed unused files
 - Chg: Cleaned up code
-- Bug: #3 can't install, won't create database tables
+- New: Added widget to sidebar that shows the recent entries
 
 Version 0.3.2
 -------------
-- New: Added typeahead to search field in the navigation
 - Chg: Removed some usages of non existing JS and CSS files
+- New: Added typeahead to search field in the navigation
 
 Version 0.3.1
 -------------
@@ -43,7 +44,7 @@ Version 0.3.1
 
 Version 0.3.0
 -------------
-- New: Added link to the saved URL of an entry (index.php?r=entries/index)
-- New: Added favicon
 - Chg: Improved design (using foundation)
 - Chg: Removed registration functionality
+- New: Added link to the saved URL of an entry (index.php?r=entries/index)
+- New: Added favicon
