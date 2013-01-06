@@ -33,12 +33,23 @@ class SetupController extends Controller
         }
 
         // check php version
-        $phpVersion = PHP_VERSION >= 5;
+        $phpVersion = PHP_VERSION >= 5.2;
 
         if (!$phpVersion)
         {
             $continue = false;
         }
+
+        // check pdo
+        $pdoLoaded = extension_loaded('pdo');
+
+        if (!$pdoLoaded)
+        {
+            $continue = false;
+        }
+
+        // check str_getcsv() is available
+        $strGetcsvAvailable = function_exists('str_getcsv');
 
         if ($continue)
         {
@@ -46,9 +57,11 @@ class SetupController extends Controller
         }
 
         $this->render('step1', array(
-            'permissions' => $permissions,
-            'phpVersion'  => $phpVersion,
-            'continue'    => $continue,
+            'permissions'        => $permissions,
+            'phpVersion'         => $phpVersion,
+            'pdoLoaded'          => $pdoLoaded,
+            'strGetcsvAvailable' => $strGetcsvAvailable,
+            'continue'           => $continue,
         ));
     }
 
@@ -281,11 +294,6 @@ class SetupController extends Controller
         $model->name = Setting::TAG_CLOUD_WIDGET_POSITION;
         $model->value = 0;
         $model->save(false);
-
-
-
-
-
     }
     
 
@@ -300,7 +308,8 @@ class SetupController extends Controller
 
         if ($step > Yii::app()->user->getState('step', 1))
         {
-            $this->redirect(array('setup/index', 'step' => Yii::app()->user->getState('step')));
+            //$step = Yii::app()->user->getState('step', 1);
+            $this->redirect(array('setup/index', 'step' => Yii::app()->user->getState('step', 1)));
         }
 
         switch ($step)
