@@ -7,6 +7,7 @@ __TOC__
 2. INSTALLATION
 3. UPGRADING
 4. DONATIONS
+5. CREDITS
 
 
 1. REQUIREMENTS
@@ -49,4 +50,14 @@ methods to do that:
 - send me some bitcoin: 1BwXw12NwPJ6VVKmJ18zWXnhTqEdthpzAV
 - shout me a beer if you see me somewhere ;-)
 
-thank you!
+Thank you!
+
+
+5. CREDITS
+==========
+
+- Yii Framework http://www.yiiframework.com/
+- Foundation 3 http://foundation.zurb.com/
+- jQuery http://jquery.com/
+- jQuery UI http://jqueryui.com/
+- csvexport http://www.yiiframework.com/extension/csvexport
