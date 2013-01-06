@@ -1,6 +1,10 @@
 PHP Password Manager (ppma) Change Log
 ======================================
 
+Version 0.3.6
+=============
+- Bug: Setting positions for sidebar widgets doesn't work if number of widgets is != 3
+
 Version 0.3.5.1
 -------------
 - New: Added installation guide
