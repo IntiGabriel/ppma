@@ -32,6 +32,10 @@ return array(
     
     // application components
     'components' => array(
+        'session' => array(
+            'class' => 'HttpSession',
+        ),
+
         'clientScript' => array(
             'scriptMap' => array(
                 'jquery.js'     => 'js/foundation.min.js',

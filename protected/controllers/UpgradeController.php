@@ -114,6 +114,17 @@ class UpgradeController extends Controller
 
         return $version >= '351000000';
     }
+
+    /**
+     * @return boolean
+     */
+    protected function _is0_3_6Installed()
+    {
+        $version = str_replace('.', '', Yii::app()->params['version']);
+        $version = str_pad($version, 10, 0, STR_PAD_RIGHT);
+
+        return $version >= '360000000';
+    }
     
     /**
      * @return void
@@ -369,8 +380,7 @@ class UpgradeController extends Controller
         $config['version'] = '0.3.5';
         file_put_contents($path, "<?php\n\nreturn " . $config->saveAsString() . ';');
 
-        Yii::app()->user->setFlash('version', $config['version']);
-        $this->redirect(array('/upgrade/success'));
+        $this->refresh();
     }
 
 
@@ -381,8 +391,7 @@ class UpgradeController extends Controller
     {
         if ($this->_is0_3_5_1Installed())
         {
-            Yii::app()->user->setFlash('failure', true);
-            $this->redirect(array('index'));
+            $this->redirect(array('index', 'version' => '0.3.6'));
             Yii::app()->end();
         }
 
@@ -393,6 +402,36 @@ class UpgradeController extends Controller
         file_put_contents($path, "<?php\n\nreturn " . $config->saveAsString() . ';');
 
         $this->refresh();
+    }
+
+
+    /**
+     * @return void
+     */
+    protected function _upgradeTo0_3_6()
+    {
+        if ($this->_is0_3_6Installed())
+        {
+            Yii::app()->user->setFlash('failure', true);
+            $this->redirect(array('index'));
+            Yii::app()->end();
+        }
+
+        // create session folder
+        $sessionPath = Yii::getPathOfAlias('application.runtime.sessions');
+        if (!file_exists($sessionPath))
+        {
+            mkdir($sessionPath);
+        }
+
+        // update config
+        $path = Yii::getPathOfAlias('application.config.ppma') . '.php';
+        $config = new CConfiguration(require($path));
+        $config['version'] = '0.3.6';
+        file_put_contents($path, "<?php\n\nreturn " . $config->saveAsString() . ';');
+
+        Yii::app()->user->setFlash('version', $config['version']);
+        $this->redirect(array('/upgrade/success'));
     }
 
 

@@ -17,6 +17,7 @@ class SetupController extends Controller
         $pathes = array(
             Yii::getPathOfAlias('webroot.assets'),
             Yii::getPathOfAlias('application.runtime'),
+            Yii::getPathOfAlias('application.runtime.sessions'),
             Yii::getPathOfAlias('application.config.ppma') . '.php',
         );
 
