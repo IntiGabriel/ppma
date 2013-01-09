@@ -243,6 +243,7 @@ class Entry extends CActiveRecord
     public function search()
     {
         $criteria = new CDbCriteria();
+        $alias    = $this->getTableAlias();
 
         // by search term
         if (Yii::app()->request->getParam('q') != null)
@@ -250,28 +251,28 @@ class Entry extends CActiveRecord
             $term = Yii::app()->request->getParam('q');
 
             $criteria->distinct = true;
-            $criteria->join = 'LEFT JOIN EntryHasTag AS eht ON eht.entryId=t.id '
+            $criteria->join = 'LEFT JOIN EntryHasTag AS eht ON eht.entryId=' . $alias  .'.id '
                             . 'LEFT JOIN Tag ON Tag.id=eht.tagId';
 
-            $criteria->compare('t.name', $term, true, 'OR');
-            $criteria->compare('t.url', $term, true, 'OR');
-            $criteria->compare('t.comment', $term, true, 'OR');
-            $criteria->compare('t.username', $term, true, 'OR');
+            $criteria->compare($alias . '.name', $term, true, 'OR');
+            $criteria->compare($alias . '.url', $term, true, 'OR');
+            $criteria->compare($alias . '.comment', $term, true, 'OR');
+            $criteria->compare($alias . '.username', $term, true, 'OR');
             $criteria->compare('Tag.name', $term, true, 'OR');
         }
 
         // by detail search
         else
         {
-            $criteria->compare('t.name', $this->name, true);
-            $criteria->compare('t.url', $this->url, true);
-            $criteria->compare('t.comment', $this->comment);
-            $criteria->compare('t.username', $this->username);
+            $criteria->compare($alias . '.name', $this->name, true);
+            $criteria->compare($alias . '.url', $this->url, true);
+            $criteria->compare($alias . '.comment', $this->comment);
+            $criteria->compare($alias . '.username', $this->username);
 
             if (strlen($this->tagList) > 0)
             {
                 $c = new CDbCriteria();
-                $c->join = 'INNER JOIN EntryHasTag AS eht ON eht.entryId=t.id '
+                $c->join = 'INNER JOIN EntryHasTag AS eht ON eht.entryId=' . $alias . '.id '
                          . 'INNER JOIN Tag ON Tag.id=eht.tagId';
                 $c->compare('Tag.name', $this->tagList);
                 $criteria->mergeWith($c);

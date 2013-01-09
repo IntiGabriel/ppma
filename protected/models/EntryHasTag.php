@@ -100,8 +100,10 @@ class EntryHasTag extends CActiveRecord
      */
     public function userId($id)
     {
+        $alias = $this->getTableAlias();
+
         $this->getDbCriteria()->mergeWith(array(
-            'join'      => 'INNER JOIN Entry AS e ON e.id=t.entryId',
+            'join'      => 'INNER JOIN Entry AS e ON e.id=' . $alias . '.entryId',
             'condition' => 'e.userId=:userId',
             'params'    => array(':userId' => $id),
         ));

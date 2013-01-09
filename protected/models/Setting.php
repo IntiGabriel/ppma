@@ -86,15 +86,17 @@ class Setting extends CActiveRecord
      */
     public function scopes()
     {
+        $alias = $this->getTableAlias();
+
         return array(
             'sidebar' => array(
-                'condition' => 't.name=:tag_widget OR t.name=:recent_widget OR t.name=:most_viewed',
+                'condition' => $alias . '.name=:tag_widget OR ' . $alias . '.name=:recent_widget OR ' . $alias . '.name=:most_viewed',
                 'params'    => array(
                     ':tag_widget'    => Setting::TAG_CLOUD_WIDGET_POSITION,
                     ':recent_widget' => Setting::RECENT_ENTRIES_WIDGET_POSITION,
                     ':most_viewed'   => Setting::MOST_VIEWED_ENTRIES_WIDGET_POSITION,
                 ),
-                'order' => 't.value ASC',
+                'order' => $alias . '.value ASC',
             ),
         );
     }

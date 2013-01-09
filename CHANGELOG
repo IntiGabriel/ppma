@@ -4,6 +4,7 @@ PHP Password Manager (ppma) Change Log
 Version 0.3.6
 =============
 - Bug: Setting positions for sidebar widgets doesn't work if number of widgets is != 3
+- Chg: Upgraded to Yii 1.1.13
 - Enh: Extended check of requirements in setup routine
 - New #7: Added password generator
 - New: Changed path of session files to /protected/runtime/sessions
