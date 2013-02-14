@@ -5,15 +5,15 @@
 ?>
 
 <?php $form = $this->beginWidget('ActiveForm', array(
-	'action' => Yii::app()->createUrl($this->route),
-	'method' => 'get',
+	'action'      => Yii::app()->createUrl($this->route),
+	'method'      => 'get',
+    'htmlOptions' => array('class' => 'custom'),
 )); ?>
 
     <?php echo $form->label($model,'id'); ?>
     <?php echo $form->textField($model,'id'); ?>
 
-    <?php echo $form->label($model,'parentId'); ?>
-    <?php echo $form->textField($model,'parentId'); ?>
+    <?php $this->widget('CategoryDropdownWidget', array('model' => $model, 'form' => $form)) ?>
 
     <?php echo $form->label($model,'name'); ?>
     <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>

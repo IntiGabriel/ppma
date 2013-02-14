@@ -113,9 +113,9 @@ class CategoryController extends Controller
     {
         $model = new Category('search');
 
-        if(isset($_GET['Entry']))
+        if(isset($_GET['Category']))
         {
-            $model->attributes = $_GET['Entry'];
+            $model->attributes = $_GET['Category'];
         }
 
         $this->render('index', array(
