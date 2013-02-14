@@ -314,6 +314,8 @@ class Entry extends CActiveRecord
 
             $criteria->distinct = true;
             $criteria->join = 'LEFT JOIN EntryHasTag AS eht ON eht.entryId=' . $alias  .'.id '
+                            . 'LEFT JOIN category_has_entry AS che ON che.entryId=' . $alias  .'.id '
+                            . 'LEFT JOIN Category ON Category.id=che.categoryId '
                             . 'LEFT JOIN Tag ON Tag.id=eht.tagId';
 
             $criteria->compare($alias . '.name', $term, true, 'OR');
@@ -321,6 +323,7 @@ class Entry extends CActiveRecord
             $criteria->compare($alias . '.comment', $term, true, 'OR');
             $criteria->compare($alias . '.username', $term, true, 'OR');
             $criteria->compare('Tag.name', $term, true, 'OR');
+            $criteria->compare('Category.name', $term, true, 'OR');
         }
 
         // by detail search
@@ -337,6 +340,15 @@ class Entry extends CActiveRecord
                 $c->join = 'INNER JOIN EntryHasTag AS eht ON eht.entryId=' . $alias . '.id '
                          . 'INNER JOIN Tag ON Tag.id=eht.tagId';
                 $c->compare('Tag.name', $this->tagList);
+                $criteria->mergeWith($c);
+            }
+
+            if (count($this->categoryIds) > 0)
+            {
+                $c = new CDbCriteria();
+                $c->join = 'INNER JOIN category_has_entry AS che ON che.entryId=' . $alias . '.id '
+                    . 'INNER JOIN Category ON Category.id=che.categoryId';
+                $c->addInCondition('Category.id', $this->categoryIds);
                 $criteria->mergeWith($c);
             }
         }

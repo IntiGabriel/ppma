@@ -32,6 +32,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-s
         'parentName',
         array(
             'class' => 'ButtonColumn',
+            'buttons' => array(
+                'view' => array(
+                    'url' => 'array("entry/index", "Entry[categoryIds][]" => $data->id)',
+                )
+            )
         ),
     ),
 )); ?>
