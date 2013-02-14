@@ -5,7 +5,7 @@ return array (
   array (
     'server' => 'localhost',
     'username' => 'root',
-    'password' => 'password',
+    'password' => 'bitnami',
     'name' => 'ppma',
   ),
   'isInstalled' => true,

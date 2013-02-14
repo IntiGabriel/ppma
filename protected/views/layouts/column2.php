@@ -23,6 +23,13 @@
                     </ul>
                 </li>
                 <li class="has-dropdown">
+                    <?php echo CHtml::link('Categories', array('category/index')) ?>
+                    <ul class="dropdown">
+                        <li><?php echo CHtml::link('Overview', array('category/index')) ?></li>
+                        <li><?php echo CHtml::link('Create', array('category/create')) ?></li>
+                    </ul>
+                </li>
+                <li class="has-dropdown">
                     <?php echo CHtml::link('Tags', array('tag/index')) ?>
                     <ul class="dropdown">
                         <li><?php echo CHtml::link('Overview', array('tag/index')) ?></li>

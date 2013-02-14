@@ -131,3 +131,16 @@ a.button.postfix.second {
     border-bottom-left-radius: 0;
     border-left: 0;
 }
+
+.category-box {
+    height: 150px;
+    padding: 6px;
+    margin-bottom: 12px;
+    border-radius: 3px;
+    margin-left: 6px;
+    border: 1px #EEE solid;
+}
+
+.category-box ul {
+    list-style: none;
+}
