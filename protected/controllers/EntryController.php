@@ -181,6 +181,10 @@ class EntryController extends Controller
         $id = CHtml::activeId($model, 'tagList');
         $return[$id] = $model->tagList;
 
+        // save categories
+        $id = CHtml::activeId($model, 'categoryIds');
+        $return[$id] = $model->categoryIds;
+
         // save password if flag is setted
         if ($withPassword)
         {
