@@ -8,10 +8,17 @@
 
 <?php $form = $this->beginWidget('ActiveForm', array(
     'id'    => 'entry-form',
-    'focus' => array($model, 'name'),
+    'focus'       => array($model, 'name'),
+    'htmlOptions' => array('class' => 'custom'),
 )); ?>
 
     <?php echo $form->hiddenField($model, 'id'); ?>
+
+    <?php echo $form->labelEx($model, 'categories'); ?>
+    <?php $this->widget('ext.CategoryTreeWidget.CategoryTreeWidget', array(
+        'categories' => Category::model()->onlyRootLevel()->orderByNameAsc()->findAll(),
+        'model'      => $model,
+    )); ?>
 
     <?php echo $form->labelEx($model, 'name'); ?>
     <?php echo $form->textField($model, 'name'); ?>

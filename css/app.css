@@ -132,15 +132,19 @@ a.button.postfix.second {
     border-left: 0;
 }
 
-.category-box {
-    height: 150px;
-    padding: 6px;
+.tree-box {
+    overflow: scroll;
+    max-height: 150px;
     margin-bottom: 12px;
     border-radius: 3px;
-    margin-left: 6px;
     border: 1px #EEE solid;
+    padding: 10px;
 }
 
-.category-box ul {
+.tree-box ul {
     list-style: none;
+}
+
+.tree-box ul:last-child {
+    margin-bottom: 0px;
 }

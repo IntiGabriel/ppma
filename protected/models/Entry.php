@@ -15,6 +15,9 @@
  * @property integer $userId
  * @property string  $username
  * @property int     $viewCount
+ *
+ * @property Category[] $categories
+ * @property int[] $categoryIds
  */
 class Entry extends CActiveRecord
 {
@@ -26,15 +29,17 @@ class Entry extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'comment'   => 'Comment',
-            'id'        => 'ID',
-            'name'      => 'Name',
-            'password'  => 'Password',
-            'tagList'   => 'Tags',
-            'url'       => 'URL',
-            'userId'    => 'User',
-            'username'  => 'Username',
-            'viewCount' => 'View Count'
+            'comment'     => 'Comment',
+            'categories'  => 'Categories',
+            'categoryIds' => 'Categories',
+            'id'          => 'ID',
+            'name'        => 'Name',
+            'password'    => 'Password',
+            'tagList'     => 'Tags',
+            'url'         => 'URL',
+            'userId'      => 'User',
+            'username'    => 'Username',
+            'viewCount'   => 'View Count'
         );
     }
 
@@ -46,6 +51,7 @@ class Entry extends CActiveRecord
     public function afterDelete()
     {
         $this->deleteTags();
+        $this->deleteCategories();
         return parent::afterDelete();
     }
 
@@ -56,32 +62,49 @@ class Entry extends CActiveRecord
      */
     public function afterSave()
     {
-        // delete all tag relations
-        $this->deleteTags();
-
-        // save tags and tag relations
-        foreach ($this->tags as $tag)
+        // after update & create
+        if (in_array($this->scenario, array('update', 'create')))
         {
-            // try to receive tag from db
-            $model = Tag::model()->name( $tag->name )->userId( Yii::app()->user->id )->find();
+            // delete all tag relations
+            $this->deleteTags();
 
-            if (!is_object($model))
+            // save tags and tag relations
+            foreach ($this->tags as $tag)
             {
-                $model = $tag;
+                // try to receive tag from db
+                $model = Tag::model()->name( $tag->name )->userId( Yii::app()->user->id )->find();
+
+                if (!is_object($model))
+                {
+                    $model = $tag;
+                }
+
+                // save tag
+                $model->name = $tag->name;
+                $model->save();
+
+                // save relation
+                $relation = new EntryHasTag();
+                $relation->entryId = $this->id;
+                $relation->tagId   = $model->id;
+                $relation->save();
             }
 
-            // save tag
-            $model->name = $tag->name;
-            $model->save();
+            // delete all categories
+            $this->deleteCategories();
 
-            // save relation
-            $relation = new EntryHasTag();
-            $relation->entryId = $this->id;
-            $relation->tagId   = $model->id;
-            $relation->save();
+            // save categories
+            foreach ($this->categories as $category)
+            {
+                /* @var Category $category */
+                $relation = new CategoryHasEntry();
+                $relation->entryId    = $this->id;
+                $relation->categoryId = $category->id;
+                $relation->save();
+            }
+
+            return parent::afterSave();
         }
-
-        return parent::afterSave();
     }
 
 
@@ -102,17 +125,53 @@ class Entry extends CActiveRecord
 
 
     /**
+     * @return void
+     */
+    public function deleteCategories()
+    {
+        // runs only after delete and update
+        if (in_array($this->scenario, array('update', 'delete')))
+        {
+            $relations = CategoryHasEntry::model()->entryId($this->id)->findAll();
+
+            foreach ($relations as $relation)
+            {
+                /* @var CategoryHasEntry $relation */
+                $relation->delete();
+            }
+        }
+    }
+
+
+    /**
      *
      * @return void
      */
     public function deleteTags()
     {
-        $relations = EntryHasTag::model()->entryId($this->id)->findAll();
-
-        foreach ($relations as $relation)
+        // runs only after delete and update
+        if (in_array($this->scenario, array('update', 'delete')))
         {
-            $relation->delete();
+            $relations = EntryHasTag::model()->entryId($this->id)->findAll();
+
+            foreach ($relations as $relation)
+            {
+                $relation->delete();
+            }
         }
+    }
+
+
+    public function getCategoryIds()
+    {
+        $ids = array();
+
+        foreach ($this->categories as $category)
+        {
+            $ids[] = $category->id;
+        }
+
+        return $ids;
     }
 
 
@@ -195,8 +254,9 @@ class Entry extends CActiveRecord
     public function relations()
     {
         return array(
-            'user' => array(self::BELONGS_TO, 'User', 'userId'),
-            'tags' => array(self::MANY_MANY, 'Tag', 'EntryHasTag(entryId, tagId)'),
+            'user'       => array(self::BELONGS_TO, 'User', 'userId'),
+            'tags'       => array(self::MANY_MANY, 'Tag', 'EntryHasTag(entryId, tagId)'),
+            'categories' => array(self::MANY_MANY, 'Category', 'category_has_entry(entryId, categoryId)'),
         );
     }
 
@@ -209,6 +269,8 @@ class Entry extends CActiveRecord
     {
         return array(
             array('comment', 'default', 'value' => NULL),
+
+            array('categoryIds', 'safe'),
 
             array('id', 'safe', 'on'=>'search'),
 
@@ -304,6 +366,26 @@ class Entry extends CActiveRecord
 
 
     /**
+     * @param int[] $v
+     */
+    public function setCategoryIds($v)
+    {
+        if (is_array($v))
+        {
+            foreach ($v as $id)
+            {
+                $category = Category::model()->findByPk($id);
+
+                if ($category instanceof Category)
+                {
+                    $this->categories = array_merge($this->categories, array($category));
+                }
+            }
+        }
+    }
+
+
+    /**
      *
      * @param string $v
      * @return void
@@ -334,8 +416,12 @@ class Entry extends CActiveRecord
      */
     public function incrementViewCounter()
     {
+        $oldScenario = $this->scenario;
+        $this->scenario = 'incrementCounter';
         $this->viewCount++;
         $this->save(true, array('viewCount'));
+        $this->scenario = $oldScenario;
+
     }
 
 }

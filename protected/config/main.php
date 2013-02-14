@@ -23,13 +23,13 @@ return array(
         'gii' => array(
             'class'          => 'system.gii.GiiModule',
             'password'       => 'password',
-            'ipFilters'      => array('192.168.*.*'),
+            //'ipFilters'      => array('127.0.0.1'),
             'generatorPaths' => array(
                 'ext.gtc',
             ),
         ),
     ),
-    
+
     // application components
     'components' => array(
         'session' => array(
