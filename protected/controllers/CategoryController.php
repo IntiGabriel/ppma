@@ -16,29 +16,29 @@ class CategoryController extends Controller
         );
     }
 
+
     /**
      * @return array
      */
     public function accessRules()
     {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
+            array('allow',
                 'actions' => array('index', 'view'),
                 'users' => array('*'),
             ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+            array('allow',
                 'actions' => array('create', 'update', 'delete'),
                 'users' => array('@'),
             ),
-            array('deny', // deny all users
+            array('deny',
                 'users' => array('*'),
             ),
         );
     }
 
     /**
-     * Displays a particular model.
-     * @param integer $id the ID of the model to be displayed
+     * @param integer $id
      */
     public function actionView($id)
     {
@@ -48,20 +48,25 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return void
      */
     public function actionCreate()
     {
-        $model = new Category;
+        // create model
+        $model = new Category();
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
+        // form is submitted
         if (isset($_POST['Category'])) {
+            // set form to model
             $model->attributes = $_POST['Category'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+
+            // validate & save form
+            if ($model->save()) {
+
+                Yii::app()->user->setFlash('success', 'The category was created successfully.');
+
+                $this->redirect(array('index'));
+            }
         }
 
         $this->render('create', array(
@@ -70,21 +75,25 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates a particular model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id the ID of the model to be updated
+     * @param integer $id
      */
     public function actionUpdate($id)
     {
+        // load model
         $model = $this->loadModel($id);
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
-        if (isset($_POST['Category'])) {
+        // form is submitted
+        if (isset($_POST['Category']))
+        {
+            // set form to model
             $model->attributes = $_POST['Category'];
+
+            // validate & save model
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            {
+                Yii::app()->user->setFlash('success', 'The category was saved successfully.');
+                $this->redirect(array('index'));
+            }
         }
 
         $this->render('update', array(
@@ -93,27 +102,26 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
-     * @param integer $id the ID of the model to be deleted
+     * @param integer $id
      */
     public function actionDelete($id)
     {
         $this->loadModel($id)->delete();
 
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
+        {
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        }
     }
 
     /**
-     * Lists all models.
+     * @return void
      */
     public function actionIndex()
     {
         $model = new Category('search');
 
-        if(isset($_GET['Category']))
+        if (isset($_GET['Category']))
         {
             $model->attributes = $_GET['Category'];
         }
@@ -125,8 +133,6 @@ class CategoryController extends Controller
 
 
     /**
-     * Returns the data model based on the primary key given in the GET variable.
-     * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
      * @return Category the loaded model
      * @throws CHttpException
@@ -134,20 +140,13 @@ class CategoryController extends Controller
     public function loadModel($id)
     {
         $model = Category::model()->findByPk($id);
+
         if ($model === null)
+        {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
+
         return $model;
     }
 
-    /**
-     * Performs the AJAX validation.
-     * @param Category $model the model to be validated
-     */
-    protected function performAjaxValidation($model)
-    {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'category-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-    }
 }
