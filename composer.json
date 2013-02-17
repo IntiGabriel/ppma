@@ -1,0 +1,10 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "3.7.14",
+        "phpunit/phpunit-selenium": "1.2.12",
+        "phpunit/php-invoker": "1.1.2",
+        "phpunit/dbunit": "1.2.2",
+        "phpunit/phpunit-story": "1.0.1",
+        "claylo/selenium-server-standalone": "2.26.0"
+    }
+}
