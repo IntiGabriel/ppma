@@ -8,6 +8,21 @@ return CMap::mergeArray(
             'fixture' => array(
                 'class' => 'system.test.CDbFixtureManager',
             ),
+            'db' => array(
+                'connectionString' => 'mysql:host=127.0.0.1;dbname=ppma-test',
+                'username'         => 'root',
+                'password'         => 'bitnami',
+            ),
+            'log' => array(
+                'class'  => 'CLogRouter',
+                'routes' => array(
+                    array(
+                        'class'  => 'CFileLogRoute',
+                        'levels' => 'error, warning',
+                    ),
+                ),
+            ),
         ),
     )
 );
+
