@@ -8,6 +8,7 @@ Version 0.3.6
 - Enh: Extended check of requirements in setup routine
 - New #7: Added password generator
 - New: Changed path of session files to /protected/runtime/sessions
+- New: Added categories
 
 Version 0.3.5.1
 -------------

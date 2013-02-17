@@ -31,6 +31,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-s
         'name',
         'parentName',
         array(
+            'class' => 'CDataColumn',
+            'name' => 'Entries',
+            'value' => 'count($data->entries)',
+        ),
+        array(
             'class' => 'ButtonColumn',
             'buttons' => array(
                 'view' => array(

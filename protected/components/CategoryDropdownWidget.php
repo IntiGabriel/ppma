@@ -4,9 +4,15 @@ class CategoryDropdownWidget extends CWidget
 {
 
     /**
-     * @var Category
+     * @var CActiveRecord
      */
     public $model;
+
+
+    /**
+     * @var string
+     */
+    public $attribute = 'parentId';
 
 
     /**
@@ -42,8 +48,9 @@ class CategoryDropdownWidget extends CWidget
         parent::run();
 
         $this->render(lcfirst(__CLASS__), array(
-            'model' => $this->model,
-            'form'  => $this->form,
+            'model'     => $this->model,
+            'form'      => $this->form,
+            'attribute' => $this->attribute,
         ));
     }
 

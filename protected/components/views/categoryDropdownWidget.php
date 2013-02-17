@@ -2,6 +2,7 @@
 /* @var CategoryDropdownWidget $this */
 /* @var Category $model */
 /* @var CActiveForm $form */
+/* @var string $attribute */
 
 /* @var CClientScript $clientScript */
 $clientScript = Yii::app()->clientScript;
@@ -11,8 +12,8 @@ $clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.foundation.f
 
 
 <?php /* Label and Dropdown */ ?>
-<?php echo $form->labelEx($model, 'parentId'); ?>
-<?php echo $form->dropDownList($model, 'parentId',
+<?php echo $form->labelEx($model, $attribute); ?>
+<?php echo $form->dropDownList($model, $attribute,
     CHtml::listData(Category::model()->orderByNameAsc()->without($model->id)->findAll(), 'id', 'name'),
     array('empty' => Category::NO_PARENT_STRING, 'class' => 'hide')
 ); ?>
@@ -21,21 +22,23 @@ $clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.foundation.f
 <div class="custom dropdown">
     <a href="#" class="current">
         <?php if ($model->parentId == null) : ?>
-        <?php echo Category::NO_PARENT_STRING; ?>
+            <?php echo Category::NO_PARENT_STRING; ?>
         <?php else : ?>
-        <?php $parent = Category::model()->findByPk($model->parentId) ?>
-        <?php if ($parent instanceof Category) : ?>
-            <?php echo CHtml::encode($parent->name) ?>
+            <?php $parent = Category::model()->findByPk($model->parentId) ?>
+
+            <?php if ($parent instanceof Category) : ?>
+                <?php echo CHtml::encode($parent->name) ?>
             <?php else : ?>
-            Error: Parent category does not exist
+                Error: Parent category does not exist
             <?php endif; ?>
         <?php endif; ?>
     </a>
     <a href="#" class="custom selector"></a>
     <ul>
         <li><?php echo Category::NO_PARENT_STRING; ?></li>
+
         <?php foreach (Category::model()->orderByNameAsc()->without($model->id)->findAll() as $category) : ?>
-        <li><?php echo $category->name ?></li>
+            <li><?php echo $category->name ?></li>
         <?php endforeach ?>
     </ul>
 </div>
