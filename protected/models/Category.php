@@ -19,6 +19,34 @@ class Category extends CActiveRecord
 
 
     /**
+     * ON DELETE CASCADE
+     */
+    protected  function afterDelete()
+    {
+        foreach ($this->childs as $child)
+        {
+            $child->delete();
+        }
+
+        parent::afterDelete();
+    }
+
+
+    /**
+     * @return bool
+     */
+    protected function beforeSave()
+    {
+        if ($this->parent instanceof Category)
+        {
+            $this->parentId = $this->parent->id;
+        }
+
+        return parent::beforeSave();
+    }
+
+
+    /**
      * @return string
      */
     public function getParentName()
@@ -60,6 +88,7 @@ class Category extends CActiveRecord
             array('name', 'required'),
             array('parentId', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
+            array('parentId', 'exist', 'className' => 'Category', 'attributeName' => 'id', 'skipOnError' => true),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, parentId, name', 'safe', 'on' => 'search'),
@@ -88,21 +117,6 @@ class Category extends CActiveRecord
             'parentId' => 'Parent Category',
             'name'     => 'Name',
         );
-    }
-
-
-    /**
-     * ON DELETE SET NULL
-     */
-    protected  function afterDelete()
-    {
-        foreach ($this->childs as $child)
-        {
-            $child->parentId = null;
-            $child->save();
-        }
-
-        parent::afterDelete();
     }
 
 
