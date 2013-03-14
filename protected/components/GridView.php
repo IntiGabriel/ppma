@@ -4,6 +4,10 @@ Yii::import('zii.widgets.grid.CGridView');
 
 class GridView extends CGridView
 {
+
+    /**
+     * @return void
+     */
     public function init()
     {
         $this->pager = array(

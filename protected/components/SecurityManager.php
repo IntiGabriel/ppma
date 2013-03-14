@@ -4,10 +4,10 @@ class SecurityManager extends CSecurityManager
 {
 
     /**
-     *
      * @param string $password
-     * @param User   $user
+     * @param User $user
      * @return string
+     * @throws CException
      */
     public function padUserPassword($password, $user = null)
     {
@@ -20,7 +20,6 @@ class SecurityManager extends CSecurityManager
         {
             throw new CException();
         }
-
 
         return substr($password . $user->salt, 0, 32);
     }

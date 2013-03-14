@@ -8,6 +8,10 @@ class EntryButtonColumn extends ButtonColumn
      */
     public $template = '{website}{update}{delete}';
 
+
+    /**
+     * @var array
+     */
     public $buttons = array(
         'website' => array(
             'label'   => '<i class="foundicon-access-network"></i>',
@@ -16,6 +20,10 @@ class EntryButtonColumn extends ButtonColumn
         ),
     );
 
+
+    /**
+     * @return void
+     */
     protected function initDefaultButtons()
     {
         parent::initDefaultButtons();
@@ -28,9 +36,10 @@ class EntryButtonColumn extends ButtonColumn
                 'data-reveal-id' => 'entry-form-modal',
                 'class'          => 'update-entry',
             ),
-            'url'     => 'array("entry/update", "id" => $data->id)',
+            'url' => 'array("entry/update", "id" => $data->id)',
         );
     }
+
 
     /**
      * @param string $id
@@ -43,7 +52,10 @@ class EntryButtonColumn extends ButtonColumn
         // add rel-attribute to update-button
         if ($id == 'update')
         {
-            $button['options']['rel'] = CHtml::normalizeUrl(array('entry/getData', 'id' => $data->id, 'withPassword' => 1));
+            $button['options']['rel'] = CHtml::normalizeUrl(array('entry/getData',
+                'id'           => $data->id,
+                'withPassword' => 1
+            ));
         }
 
         // render website only if url available
@@ -53,6 +65,11 @@ class EntryButtonColumn extends ButtonColumn
         }
     }
 
+
+    /**
+     * @param int $row
+     * @param mixed $data
+     */
     protected function renderDataCellContent($row, $data)
     {
         if (strlen($data->url) == 0)
@@ -62,6 +79,5 @@ class EntryButtonColumn extends ButtonColumn
 
         parent::renderDataCellContent($row, $data);
     }
-
 
 }

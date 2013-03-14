@@ -9,12 +9,14 @@ class UserIdentity extends CUserIdentity
 {
 
     /**
-     *
      * @var User
      */
-    protected $_model;
+    protected $model;
 
 
+    /**
+     * @return bool
+     */
     public function authenticate()
     {
         // get user by username
@@ -38,7 +40,7 @@ class UserIdentity extends CUserIdentity
 
         // login success
         else {
-            $this->_model = $model;
+            $this->model = $model;
             Yii::app()->user->encryptionKey = Yii::app()->securityManager->decrypt($model->encryptionKey, $this->password);
             $this->errorCode = self::ERROR_NONE;
         }
@@ -53,7 +55,7 @@ class UserIdentity extends CUserIdentity
      */
     public function getId()
     {
-        return $this->_model->id;
+        return $this->model->id;
     }
 
 }

@@ -30,8 +30,8 @@ class WebUser extends CWebUser
 
 
     /**
-     *
      * @return string
+     * @throws CException
      */
     public function getEncryptionKey()
     {
@@ -55,13 +55,12 @@ class WebUser extends CWebUser
 
 
     /**
-     *
      * @param string $value
      * @return void
      */
     public function setEncryptionKey($value)
     {
-        return $this->setState('__encryptionKey', $value);
+        $this->setState('__encryptionKey', $value);
     }
 
 

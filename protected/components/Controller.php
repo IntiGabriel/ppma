@@ -4,16 +4,16 @@ class Controller extends CController
 {
 
     /**
-     *
      * @var string
      */
     public $layout = 'column1';
 
+
     /**
-     *
      * @var array
      */
     public $menu = array();
+
 
     /**
      * @var array
