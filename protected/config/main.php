@@ -47,6 +47,7 @@ return array(
             'connectionString' => 'mysql:host=' . $ppma['db']['server'] . ';dbname=' . $ppma['db']['name'],
             'username'         => $ppma['db']['username'],
             'password'         => $ppma['db']['password'],
+            'enableProfiling'  => YII_DEBUG,
         ),
 
         'errorHandler' => array(
@@ -59,6 +60,11 @@ return array(
                 array(
                     'class'  => 'CFileLogRoute',
                     'levels' => 'error, warning',
+                ),
+                array(
+                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    // Access is restricted by default to the localhost
+                    //'ipFilters'=>array('127.0.0.1','192.168.1.*', 88.23.23.0/24),
                 ),
             ),
         ),
