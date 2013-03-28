@@ -1,13 +1,5 @@
 # PHP Password Manager // ppma
 
-__TOC__
-
-1. REQUIREMENTS
-2. INSTALLATION
-3. UPGRADING
-4. DONATIONS
-5. CREDITS
-
 
 ## Requirements
 
