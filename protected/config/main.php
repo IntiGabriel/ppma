@@ -16,6 +16,7 @@ return array(
         'application.models.*',
         'application.models.forms.*',
         'application.components.*',
+        'application.extensions.chromephp.ChromePhp',
     ),
 
     // modules
@@ -60,11 +61,6 @@ return array(
                 array(
                     'class'  => 'CFileLogRoute',
                     'levels' => 'error, warning',
-                ),
-                array(
-                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    // Access is restricted by default to the localhost
-                    //'ipFilters'=>array('127.0.0.1','192.168.1.*', 88.23.23.0/24),
                 ),
             ),
         ),
