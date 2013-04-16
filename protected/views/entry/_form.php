@@ -31,7 +31,7 @@
     <?php echo $form->labelEx($model, 'password'); ?>
     <div class="row collapse">
         <div class="ten columns">
-            <?php echo $form->passwordField($model, 'password'); ?>
+            <?php echo $form->passwordField($model, 'password', array('required' => 'true')); ?>
         </div>
         <div class="one columns">
             <a class="postfix first button secondary expand generate-password"><i class="foundicon-access-key"></i></a>
@@ -43,7 +43,7 @@
     <?php echo $form->error($model, 'password'); ?>
 
     <?php echo $form->labelEx($model, 'url'); ?>
-    <?php echo $form->textField($model, 'url'); ?>
+    <?php echo $form->urlField($model, 'url', array('placeholder' => 'http://www.example.com')); ?>
     <?php echo $form->error($model, 'url'); ?>
 
     <?php echo $form->labelEx($model, 'tagList'); ?>
