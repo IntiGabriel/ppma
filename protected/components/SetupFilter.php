@@ -9,16 +9,23 @@ class SetupFilter extends CFilter
      */
     protected function preFilter($filterChain)
     {
-        // app isn't installed & current controller isn't SetupController -> redirect to /setup
+        // if app isn't installed & current controller isn't SetupController -> redirect to /setup
         if (!Yii::app()->params['isInstalled'] && $filterChain->controller->id != 'setup')
         {
+            // tracing
+            Yii::trace('Redirect to SetupController');
+
+            // redirect to setup controller
             $filterChain->controller->redirect(array('setup/'));
             return false;
         }
 
-        // app is installed & current controller is SetupController -> redirect to homeUrl
+        // if app is installed & current controller is SetupController -> redirect to homeUrl
         else if (Yii::app()->params['isInstalled'] && $filterChain->controller->id == 'setup')
         {
+            // tracing
+            Yii::trace('Redirect to home-URL: ' . Yii::app()->homeUrl);
+
             $filterChain->controller->redirect(Yii::app()->homeUrl);
             return false;
         }

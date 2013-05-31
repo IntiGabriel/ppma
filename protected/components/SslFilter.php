@@ -16,7 +16,13 @@ class SslFilter extends CFilter
         
         if (!Yii::app()->request->isSecureConnection && Yii::app()->settings->getAsBool( Setting::FORCE_SSL ))
         {
+            // create ssl-url
             $url = 'https://' . Yii::app()->request->serverName . Yii::app()->request->requestUri;
+
+            // trace
+            Yii::trace('Redirect to HTTPS-URL: ' . $url);
+
+            // redirect
             Yii::app()->request->redirect($url);
             return false;
         }

@@ -8,6 +8,9 @@ class EntryButtonColumn extends ButtonColumn
      */
     public $template = '{website}{update}{delete}';
 
+    /**
+     * @var array
+     */
     public $buttons = array(
         'website' => array(
             'label'   => '<i class="foundicon-access-network"></i>',
@@ -16,6 +19,10 @@ class EntryButtonColumn extends ButtonColumn
         ),
     );
 
+
+    /**
+     * @return void
+     */
     protected function initDefaultButtons()
     {
         parent::initDefaultButtons();
@@ -31,6 +38,7 @@ class EntryButtonColumn extends ButtonColumn
             'url'     => 'array("entry/update", "id" => $data->id)',
         );
     }
+
 
     /**
      * @param string $id
@@ -53,6 +61,11 @@ class EntryButtonColumn extends ButtonColumn
         }
     }
 
+
+    /**
+     * @param int $row
+     * @param mixed $data
+     */
     protected function renderDataCellContent($row, $data)
     {
         if (strlen($data->url) == 0)

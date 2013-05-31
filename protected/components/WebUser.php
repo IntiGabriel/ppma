@@ -1,14 +1,12 @@
 <?php
 
 /**
- *
  * @property string $encryptionKey
  */
 class WebUser extends CWebUser
 {
 
     /**
-     *
      * @param string $text
      * @return string
      */
@@ -19,7 +17,6 @@ class WebUser extends CWebUser
 
 
     /**
-     *
      * @param string $text
      * @return string
      */
@@ -30,8 +27,8 @@ class WebUser extends CWebUser
 
 
     /**
-     *
-     * @return string
+     * @return mixed
+     * @throws CException
      */
     public function getEncryptionKey()
     {
@@ -45,7 +42,6 @@ class WebUser extends CWebUser
     
     
     /**
-     * 
      * @return boolean
      */
     public function getIsAdmin()
@@ -55,14 +51,12 @@ class WebUser extends CWebUser
 
 
     /**
-     *
      * @param string $value
      * @return void
      */
     public function setEncryptionKey($value)
     {
-        return $this->setState('__encryptionKey', $value);
+        $this->setState('__encryptionKey', $value);
     }
-
 
 }

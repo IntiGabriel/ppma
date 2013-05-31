@@ -4,7 +4,6 @@ class SettingsComponent extends CApplicationComponent
 {
     
     /**
-     * 
      * @param string $name
      * @return mixed
      */
@@ -22,7 +21,7 @@ class SettingsComponent extends CApplicationComponent
         // Setting does not extist -> return NULL
         else
         {
-            return NULL;
+            return null;
         }
     }
      
@@ -39,7 +38,6 @@ class SettingsComponent extends CApplicationComponent
     
     
     /**
-     * 
      * @param string $name
      * @return boolean
      */
@@ -61,7 +59,6 @@ class SettingsComponent extends CApplicationComponent
     
     
     /**
-     * 
      * @param string $name
      * @return integer
      */

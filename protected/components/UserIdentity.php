@@ -9,14 +9,19 @@ class UserIdentity extends CUserIdentity
 {
 
     /**
-     *
      * @var User
      */
     protected $_model;
 
 
+    /**
+     * @return bool
+     */
     public function authenticate()
     {
+        // tracing
+        Yii::trace('Try to log in: ' . $this->username);
+
         // get user by username
         $model = User::model()->find('username=:username', array(':username' => $this->username));
 

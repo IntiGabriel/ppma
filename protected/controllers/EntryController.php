@@ -16,6 +16,7 @@ class EntryController extends Controller
      */
     protected function _loadModel($id)
     {
+        /* @var Entry $model */
         $model = Entry::model()->findbyPk($id);
 
         if ($model === null)
@@ -93,6 +94,9 @@ class EntryController extends Controller
             // save model & redirect to index
             if($model->save())
             {
+                // tracing
+                Yii::trace('Entry created (ID:  ' . $model->id . ')');
+
                 // set flash
                 Yii::app()->user->setFlash('success', 'The entry was created successfully.');
 
@@ -101,17 +105,6 @@ class EntryController extends Controller
             }
         }
         
-        // render view
-        /*
-        if (Yii::app()->request->isAjaxRequest)
-        {
-            $this->renderPartial('create', array('form' => $form));
-        }
-        else
-        {
-            $this->render('create', array('model' => $model));
-        }
-        */
         $this->render('create', array('model' => $model));
     }
 
@@ -122,7 +115,7 @@ class EntryController extends Controller
      */
     public function actionDelete($id)
     {
-        // we only allow deletion via POST request
+        // POST request are allowed only
         if(!Yii::app()->request->isPostRequest)
         {
             throw new CHttpException(400);
@@ -139,6 +132,9 @@ class EntryController extends Controller
 
         // delete entry
         $model->delete();
+
+        // Tracing
+        Yii::trace('Entry deleted (ID: ' . $model->id . ')');
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if(!isset($_GET['ajax']))
@@ -239,6 +235,9 @@ class EntryController extends Controller
             // save entry
             if($model->save() && !Yii::app()->request->isAjaxRequest)
             {
+                // tracing
+                Yii::trace('Entry updated (ID: ' . $model->id . ')');
+
                 // set flash
                 Yii::app()->user->setFlash('success', 'The entry was saved successfully.');
 
