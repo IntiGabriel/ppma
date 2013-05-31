@@ -7,6 +7,7 @@ $ppma = include dirname(__FILE__) . '/ppma.php';
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name'     => 'PHP Password Manager',
+    'timeZone' => $ppma['timezone'],
 
     // preloading 'log' component
 	'preload' => array('log'),

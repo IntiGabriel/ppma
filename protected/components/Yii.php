@@ -19,7 +19,8 @@ class Yii extends YiiBase
 /**
  * Class Application
  *
- * @property WebUser         $user
- * @property SecurityManager $securityManager
+ * @property WebUser           $user
+ * @property SecurityManager   $securityManager
+ * @property SettingsComponent $settings
  */
 class Application extends CWebApplication { }
