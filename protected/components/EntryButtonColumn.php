@@ -39,7 +39,7 @@ class EntryButtonColumn extends ButtonColumn
         );
     }
 
-
+    
     /**
      * @param string $id
      * @param array $button
@@ -51,7 +51,10 @@ class EntryButtonColumn extends ButtonColumn
         // add rel-attribute to update-button
         if ($id == 'update')
         {
-            $button['options']['rel'] = CHtml::normalizeUrl(array('entry/getData', 'id' => $data->id, 'withPassword' => 1));
+            $button['options']['rel'] = CHtml::normalizeUrl(array('entry/getData',
+                'id'           => $data->id,
+                'withPassword' => 1
+            ));
         }
 
         // render website only if url available
@@ -75,6 +78,5 @@ class EntryButtonColumn extends ButtonColumn
 
         parent::renderDataCellContent($row, $data);
     }
-
 
 }

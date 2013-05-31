@@ -7,7 +7,7 @@
 die(sprintf('This file is for testing only. Remove or comment line %d in [ppma-directory]/index-test.php', __LINE__)); die();
 
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/yii/yii.php';
+$yii=dirname(__FILE__).'/yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/test.php';
 
 // remove the following line when in production mode

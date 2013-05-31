@@ -4,8 +4,8 @@ class SecurityManager extends CSecurityManager
 {
 
     /**
-     * @param $password
-     * @param User|null $user
+     * @param string $password
+     * @param User $user
      * @return string
      * @throws CException
      */

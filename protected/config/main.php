@@ -16,6 +16,7 @@ return array(
         'application.models.*',
         'application.models.forms.*',
         'application.components.*',
+        'application.extensions.chromephp.ChromePhp',
     ),
 
     // modules
@@ -23,15 +24,19 @@ return array(
         'gii' => array(
             'class'          => 'system.gii.GiiModule',
             'password'       => 'password',
-            'ipFilters'      => array('192.168.*.*'),
+            //'ipFilters'      => array('127.0.0.1'),
             'generatorPaths' => array(
                 'ext.gtc',
             ),
         ),
     ),
-    
+
     // application components
     'components' => array(
+        'session' => array(
+            'class' => 'HttpSession',
+        ),
+
         'clientScript' => array(
             'scriptMap' => array(
                 'jquery.js'     => 'js/foundation.min.js',
@@ -43,6 +48,7 @@ return array(
             'connectionString' => 'mysql:host=' . $ppma['db']['server'] . ';dbname=' . $ppma['db']['name'],
             'username'         => $ppma['db']['username'],
             'password'         => $ppma['db']['password'],
+            'enableProfiling'  => YII_DEBUG,
         ),
 
         'errorHandler' => array(

@@ -91,8 +91,10 @@ class Tag extends CActiveRecord
      */
     public function name($v)
     {
+        $alias = $this->getTableAlias();
+
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => 't.name=:tname',
+            'condition' => $alias . '.name=:tname',
             'params'    => array(':tname' => $v),
         ));
 
@@ -158,8 +160,10 @@ class Tag extends CActiveRecord
      */
     public function userId($id)
     {
+        $alias = $this->getTableAlias();
+
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => 't.userId=:userId',
+            'condition' => $alias . '.userId=:userId',
             'params'    => array(':userId' => $id),
         ));
 

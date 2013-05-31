@@ -1,6 +1,7 @@
 <?php
 
 /**
+ *
  * @property string $encryptionKey
  */
 class WebUser extends CWebUser
@@ -27,8 +28,7 @@ class WebUser extends CWebUser
 
 
     /**
-     * @return mixed
-     * @throws CException
+     * @return string
      */
     public function getEncryptionKey()
     {
@@ -56,7 +56,8 @@ class WebUser extends CWebUser
      */
     public function setEncryptionKey($value)
     {
-        $this->setState('__encryptionKey', $value);
+        return $this->setState('__encryptionKey', $value);
     }
+
 
 }

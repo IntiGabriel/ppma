@@ -87,23 +87,23 @@ class SettingsController extends Controller
             throw new CHttpException(400);
         }
 
-        $neededParams = array(
+        $availableParams = array(
             Setting::MOST_VIEWED_ENTRIES_WIDGET_POSITION,
             Setting::RECENT_ENTRIES_WIDGET_POSITION,
             Setting::TAG_CLOUD_WIDGET_POSITION,
         );
 
-        // check if all needed params exist
-        foreach ($neededParams as $paramName)
+        // complement not sended params
+        foreach ($availableParams as $index => $paramName)
         {
             if (!isset($_POST[$paramName]))
             {
-                throw new CHttpException(401);
+                $_POST[$paramName] = $index + 100;
             }
         }
 
         // save settings
-        foreach ($neededParams as $paramName)
+        foreach ($availableParams as $paramName)
         {
             /* @var Setting $model */
             $param = CPropertyValue::ensureInteger($_POST[$paramName]);

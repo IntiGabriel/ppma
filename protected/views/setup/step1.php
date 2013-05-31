@@ -1,6 +1,3 @@
-<?php
-?>
-
 <h1>Requirements</h1>
 
 <div class="form">
@@ -8,8 +5,21 @@
         <h2>Environment</h2>
         <table class="setup req">
             <tr>
-                <td>PHP-Version >= 5.0</td>
+                <td>PHP-Version >= 5.2</td>
                 <?php $value = $phpVersion ? 'true' : 'false'; ?>
+                <td class="<?php echo $value ?>"><?php echo $value ?></td>
+            </tr>
+            <tr>
+                <td>PDO is loaded</td>
+                <?php $value = $pdoLoaded ? 'true' : 'false'; ?>
+                <td class="<?php echo $value ?>"><?php echo $value ?></td>
+            </tr>
+            <tr>
+                <td>
+                    Function <code>str_getcsv()</code> is available<br />
+                    (needed for import of CSV files, not mandatory)
+                </td>
+                <?php $value = $pdoLoaded ? 'true' : 'false'; ?>
                 <td class="<?php echo $value ?>"><?php echo $value ?></td>
             </tr>
         </table>

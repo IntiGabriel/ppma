@@ -1,0 +1,55 @@
+PHP Password Manager (ppma) Change Log
+======================================
+
+Version 0.3.6
+=============
+- Bug: Setting positions for sidebar widgets doesn't work if number of widgets is != 3
+- Chg #12: Upgraded to Yii 1.1.13
+- Enh: Extended check of requirements in setup routine
+- New #7: Added password generator
+- New: Changed path of session files to /protected/runtime/sessions
+- New: Added categories
+- New: Added some unit-tests
+
+Version 0.3.5.1
+-------------
+- Bug #6: Using of non existing file /css/setup.css
+- New: Added installation guide
+
+Version 0.3.5
+-------------
+- Bug: Quicksearch doesn't work with entries which have no tags
+- Chg: Upgraded jQuery UI to version 1.9.2
+- New: Added drag-and-drop feature for sidebar
+- New: Added export to CSV
+- New: Added import from CSV
+
+Version 0.3.4
+-------------
+- Chg: Upgraded Foundation to version 3.2
+- Enh: Optimized the upgrade routine
+- New #1: Added widget to sidebar that shows the most viewed entries
+
+Version 0.3.3
+-------------
+- Bug: #3 can't install, won't create database tables
+- Chg: Removed unused files
+- Chg: Cleaned up code
+- New: Added widget to sidebar that shows the recent entries
+
+Version 0.3.2
+-------------
+- Chg: Removed some usages of non existing JS and CSS files
+- New: Added typeahead to search field in the navigation
+
+Version 0.3.1
+-------------
+- Bug: Update-modal on entry/index didn't work
+- Bug: Fresh installations didn't work, because assets/ & protected/runtime/ were missing
+
+Version 0.3.0
+-------------
+- Chg: Improved design (using foundation)
+- Chg: Removed registration functionality
+- New: Added link to the saved URL of an entry (index.php?r=entries/index)
+- New: Added favicon

@@ -28,7 +28,7 @@ class m110313_182637_settings extends CDbMigration
         
         // create init values
         $registrationEnabled = new Setting();
-        $registrationEnabled->name  = Setting::REGISTRATION_ENABLED;
+        $registrationEnabled->name  = 'registration_enabled';
         $registrationEnabled->value = 0;
         $registrationEnabled->save();
     }
