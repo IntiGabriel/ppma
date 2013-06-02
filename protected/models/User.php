@@ -133,4 +133,13 @@ class User extends CActiveRecord
         }
     }
 
+
+    /**
+     * @return string
+     */
+    public function tableName()
+    {
+        return 'user';
+    }
+
 }

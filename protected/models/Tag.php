@@ -153,6 +153,15 @@ class Tag extends CActiveRecord
 
 
     /**
+     * @return string
+     */
+    public function tableName()
+    {
+        return 'tag';
+    }
+
+
+    /**
      * Scope
      *
      * @param integer $id

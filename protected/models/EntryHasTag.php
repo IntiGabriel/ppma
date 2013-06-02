@@ -24,10 +24,8 @@ class EntryHasTag extends CActiveRecord
 
 
     /**
-     * Scope
-     *
-     * @param integer $v
-     * @return Tag
+     * @param int $id
+     * @return $this
      */
     public function entryId($id)
     {
@@ -41,6 +39,7 @@ class EntryHasTag extends CActiveRecord
 
 
     /**
+     * @param string $className
      * @return EntryHasTag
      */
     public static function model($className = __CLASS__)
@@ -50,8 +49,7 @@ class EntryHasTag extends CActiveRecord
 
 
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#relations()
+     * @return array
      */
     public function relations()
     {
@@ -63,8 +61,7 @@ class EntryHasTag extends CActiveRecord
 
 
     /**
-     * (non-PHPdoc)
-     * @see yii/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -76,10 +73,17 @@ class EntryHasTag extends CActiveRecord
 
 
     /**
-     * Scope
-     *
-     * @param integer $id
-     * @return Tag
+     * @return string
+     */
+    public function tableName()
+    {
+        return 'entryhastag';
+    }
+
+
+    /**
+     * @param $id
+     * @return $this
      */
     public function tagId($id)
     {
@@ -93,10 +97,8 @@ class EntryHasTag extends CActiveRecord
 
 
     /**
-     * Scope
-     *
-     * @param integer $id
-     * @return Tag
+     * @param $id
+     * @return $this
      */
     public function userId($id)
     {

@@ -101,4 +101,13 @@ class Setting extends CActiveRecord
         );
     }
 
+
+    /**
+     * @return string
+     */
+    public function tableName()
+    {
+        return 'setting';
+    }
+
 }

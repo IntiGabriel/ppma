@@ -424,6 +424,15 @@ class Entry extends CActiveRecord
 
 
     /**
+     * @return string
+     */
+    public function tableName()
+    {
+        return 'entry';
+    }
+
+
+    /**
      * @return void
      */
     public function incrementViewCounter()
