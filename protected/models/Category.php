@@ -76,7 +76,7 @@ class Category extends CActiveRecord
      */
     public function tableName()
     {
-        return 'Category';
+        return 'category';
     }
 
     /**
