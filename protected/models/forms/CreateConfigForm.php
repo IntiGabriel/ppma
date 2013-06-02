@@ -27,6 +27,12 @@ class CreateConfigForm extends CFormModel
      */
     public $name;
 
+    /**
+     * @var string
+     */
+    public $timezone;
+
+
 
     /**
      * (non-PHPdoc)
@@ -43,6 +49,8 @@ class CreateConfigForm extends CFormModel
 
             array('username', 'required'),
             array('username', 'testConnection', 'skipOnError' => true),
+
+            array('timezone', 'required'),
         );
     }
 
@@ -58,6 +66,7 @@ class CreateConfigForm extends CFormModel
             'password' => 'Password',
             'server'   => 'Server',
             'username' => 'Username',
+            'timezone' => 'Time Zone',
         );
     }
 

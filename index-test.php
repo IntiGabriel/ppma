@@ -4,11 +4,11 @@
  * This file should be removed when the application is deployed for production.
  */
 
-die(sprintf('This file is for testing only. Remove or comment line %d in [ppma-directory]/index-test.php', __LINE__)); die();
+//die(sprintf('This file is for testing only. Remove or comment line %d in [ppma-directory]/index-test.php', __LINE__)); die();
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/yii/framework/yii.php';
-$config=dirname(__FILE__).'/protected/config/test.php';
+$config=dirname(__FILE__).'/protected/config/main.php';
 
 // remove the following line when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);

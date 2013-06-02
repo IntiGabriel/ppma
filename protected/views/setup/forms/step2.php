@@ -18,6 +18,11 @@ return array(
             'type'  => 'text',
             'size'  => '60',
         ),
+        'timezone' => array(
+            'type' => 'dropdownlist',
+            'items' => TimeZones::$zones
+        ),
+        '<br style="clear:both" />'
     ),
 
     'buttons'=>array(

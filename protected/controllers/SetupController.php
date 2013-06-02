@@ -74,6 +74,10 @@ class SetupController extends Controller
     {
         $form = new CForm('application.views.setup.forms.step2', new CreateConfigForm());
 
+        // get model of form
+        $model = $form->model;
+        /* @var CreateConfigForm $model */
+
         // form is submitted & valid
         if ($form->submitted('create') && $form->validate())
         {
@@ -83,10 +87,11 @@ class SetupController extends Controller
             $config = require($configPath);
 
             // set config
-            $config['db']['server']      = $form->model->server;
-            $config['db']['username']    = $form->model->username;
-            $config['db']['password']    = $form->model->password;
-            $config['db']['name']        = $form->model->name;
+            $config['db']['server']   = $model->server;
+            $config['db']['username'] = $model->username;
+            $config['db']['password'] = $model->password;
+            $config['db']['name']     = $model->name;
+            $config['timezone']       = $model->timezone;
 
             // save config
             $config = new CConfiguration($config);
@@ -117,10 +122,11 @@ class SetupController extends Controller
             $configPath = Yii::getPathOfAlias('application.config.ppma') . '.php';
             $config = require($configPath);
 
-            $form->model->server   = $config['db']['server'];
-            $form->model->username = $config['db']['username'];
-            $form->model->password = $config['db']['password'];
-            $form->model->name     = $config['db']['name'];
+            $model->server   = $config['db']['server'];
+            $model->username = $config['db']['username'];
+            $model->password = $config['db']['password'];
+            $model->name     = $config['db']['name'];
+            $model->timezone = $config['timezone'];
         }
 
         $this->render('step2', array('form' => $form));
