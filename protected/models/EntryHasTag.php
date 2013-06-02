@@ -1,7 +1,6 @@
 <?php
 
 /**
- *
  * @property Entry  $entry
  * @property string $entryId
  * @property Tag    $tag
@@ -11,8 +10,16 @@ class EntryHasTag extends CActiveRecord
 {
 
     /**
-     * (non-PHPdoc)
-     * @see yii/CModel#attributeLabels()
+     * @param string $className
+     * @return EntryHasTag
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
+
+    /**
+     * @return array
      */
     public function attributeLabels()
     {
@@ -21,7 +28,6 @@ class EntryHasTag extends CActiveRecord
             'tagId'   => 'Tag ID',
         );
     }
-
 
     /**
      * @param int $id
@@ -37,17 +43,6 @@ class EntryHasTag extends CActiveRecord
         return $this;
     }
 
-
-    /**
-     * @param string $className
-     * @return EntryHasTag
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
     /**
      * @return array
      */
@@ -58,7 +53,6 @@ class EntryHasTag extends CActiveRecord
             'entry' => array(self::BELONGS_TO, 'Entry', 'entryId'),
         );
     }
-
 
     /**
      * @return array
@@ -71,7 +65,6 @@ class EntryHasTag extends CActiveRecord
         );
     }
 
-
     /**
      * @return string
      */
@@ -79,7 +72,6 @@ class EntryHasTag extends CActiveRecord
     {
         return 'entryhastag';
     }
-
 
     /**
      * @param $id
@@ -94,7 +86,6 @@ class EntryHasTag extends CActiveRecord
 
         return $this;
     }
-
 
     /**
      * @param $id

@@ -17,34 +17,14 @@ class Category extends CActiveRecord
 
     const NO_PARENT_STRING = 'no parent category';
 
-
     /**
-     * ON DELETE CASCADE
+     * @param string $className
+     * @return CActiveRecord
      */
-    protected  function afterDelete()
+    public static function model($className = __CLASS__)
     {
-        foreach ($this->childs as $child)
-        {
-            $child->delete();
-        }
-
-        parent::afterDelete();
+        return parent::model($className);
     }
-
-
-    /**
-     * @return bool
-     */
-    protected function beforeSave()
-    {
-        if ($this->parent instanceof Category)
-        {
-            $this->parentId = $this->parent->id;
-        }
-
-        return parent::beforeSave();
-    }
-
 
     /**
      * @return string
@@ -59,16 +39,6 @@ class Category extends CActiveRecord
         {
             return self::NO_PARENT_STRING;
         }
-    }
-
-
-    /**
-     * @param string $className
-     * @return CActiveRecord
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
     }
 
     /**
@@ -119,7 +89,6 @@ class Category extends CActiveRecord
         );
     }
 
-
     /**
      * @return CActiveDataProvider
      */
@@ -135,7 +104,6 @@ class Category extends CActiveRecord
             'criteria' => $criteria,
         ));
     }
-
 
     /**
      * @return array
@@ -154,7 +122,6 @@ class Category extends CActiveRecord
         );
     }
 
-
     /**
      * @param int $id
      * @return Category
@@ -172,6 +139,32 @@ class Category extends CActiveRecord
         ));
 
         return $this;
+    }
+
+    /**
+     * ON DELETE CASCADE
+     */
+    protected  function afterDelete()
+    {
+        foreach ($this->childs as $child)
+        {
+            $child->delete();
+        }
+
+        parent::afterDelete();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function beforeSave()
+    {
+        if ($this->parent instanceof Category)
+        {
+            $this->parentId = $this->parent->id;
+        }
+
+        return parent::beforeSave();
     }
 
 }

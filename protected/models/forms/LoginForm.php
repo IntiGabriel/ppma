@@ -4,21 +4,17 @@ class LoginForm extends CFormModel
 {
 
     /**
-     *
      * @var string
      */
     public $username;
-
+    
     /**
-     *
      * @var string
      */
     public $password;
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -30,10 +26,8 @@ class LoginForm extends CFormModel
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
+     * @return array
      */
     public function attributeLabels()
     {
@@ -43,9 +37,7 @@ class LoginForm extends CFormModel
         );
     }
 
-
     /**
-     *
      * @param string $attribute
      * @param array  $params
      * @return void

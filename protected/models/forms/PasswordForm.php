@@ -3,28 +3,53 @@
 class PasswordForm extends CFormModel
 {
 
-    /**
-     *
-     * @var string
-     */
-    public $oldPassword;
+
 
     /**
-     *
      * @var string
      */
     public $newPassword;
 
     /**
-     *
      * @var string
      */
     public $newPasswordRepeat;
 
+    /**
+     * @var string
+     */
+    public $oldPassword;
 
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'newPassword'       => 'New Password',
+            'newPasswordRepeat' => 'Repeat Password',
+            'oldPassword'       => 'Old Password',
+        );
+    }
+
+    /**
+     * @param string $attribute
+     * @param array  $params
+     * @return void
+     */
+    public function checkPassword($attribute, $params)
+    {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        /* @var User $user */
+
+        if (!is_object($user) || sha1($user->salt . Yii::app()->securityManager->padUserPassword($this->$attribute, $user)) != $user->password)
+        {
+            $this->addError($attribute, $this->getAttributeLabel($attribute) . ' is wrong.');
+        }
+    }
+
+    /**
+     * @return array
      */
     public function rules()
     {
@@ -37,37 +62,6 @@ class PasswordForm extends CFormModel
             array('newPasswordRepeat', 'required'),
             array('newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword', 'skipOnError' => true)
         );
-    }
-
-
-    /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
-     */
-    public function attributeLabels()
-    {
-        return array(
-            'newPassword'       => 'New Password',
-            'newPasswordRepeat' => 'Repeat Password',
-            'oldPassword'       => 'Old Password',
-        );
-    }
-
-
-    /**
-     *
-     * @param string $attribute
-     * @param array  $params
-     * @return void
-     */
-    public function checkPassword($attribute, $params)
-    {
-        $user = User::model()->findByPk(Yii::app()->user->id);
-
-        if (!is_object($user) || sha1($user->salt . Yii::app()->securityManager->padUserPassword($this->$attribute, $user)) != $user->password)
-        {
-            $this->addError($attribute, $this->getAttributeLabel($attribute) . ' is wrong.');
-        }
     }
 
 }

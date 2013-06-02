@@ -33,10 +33,8 @@ class ImportCsvForm extends CFormModel
      */
     public $comment;
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -59,10 +57,8 @@ class ImportCsvForm extends CFormModel
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
+     * @return array
      */
     public function attributeLabels()
     {

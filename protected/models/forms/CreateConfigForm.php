@@ -4,25 +4,21 @@ class CreateConfigForm extends CFormModel
 {
 
     /**
-     *
      * @var string
      */
     public $server;
 
     /**
-     *
      * @var string
      */
     public $username;
 
     /**
-     *
      * @var string
      */
     public $password;
 
     /**
-     *
      * @var string
      */
     public $name;
@@ -32,11 +28,8 @@ class CreateConfigForm extends CFormModel
      */
     public $timezone;
 
-
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -54,10 +47,8 @@ class CreateConfigForm extends CFormModel
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
+     * @return array
      */
     public function attributeLabels()
     {
@@ -70,9 +61,7 @@ class CreateConfigForm extends CFormModel
         );
     }
 
-
     /**
-     *
      * @param string $attribute
      * @param array  $params
      * @return void

@@ -28,10 +28,8 @@ class ApplicationSettingsForm extends CFormModel
      */
     public $mostViewedEntriesWidgetCount;
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -45,27 +43,9 @@ class ApplicationSettingsForm extends CFormModel
             array('mostViewedEntriesWidgetCount', 'numerical', 'min' => 1, 'skipOnError' => true, 'tooSmall' => 'Number is too small.'),
         );
     }
-    
-    
-    /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#afterConstruct()
-     */
-    protected function afterConstruct()
-    {
-        $this->forceSSL                       = Yii::app()->settings->get( Setting::FORCE_SSL );
-        $this->recentEntryWidgetEnabled       = Yii::app()->settings->get( Setting::RECENT_ENTRIES_WIDGET_ENABLED );
-        $this->recentEntryWidgetCount         = Yii::app()->settings->get( Setting::RECENT_ENTRIES_WIDGET_COUNT );
-        $this->mostViewedEntriesWidgetEnabled = Yii::app()->settings->get( Setting::MOST_VIEWED_ENTRIES_WIDGET_ENABLED );
-        $this->mostViewedEntriesWidgetCount   = Yii::app()->settings->get( Setting::MOST_VIEWED_ENTRIES_WIDGET_COUNT );
-        
-        return parent::afterConstruct();
-    }
-
 
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
+     * @return array
      */
     public function attributeLabels()
     {
@@ -76,6 +56,20 @@ class ApplicationSettingsForm extends CFormModel
             'mostViewedEntriesWidgetEnabled' => 'Enabled "Most Viewed" widget',
             'mostViewedEntriesWidgetCount'   => 'Number of entries in the "Most Viewed" widget',
         );
+    }
+
+    /**
+     * @return void
+     */
+    protected function afterConstruct()
+    {
+        $this->forceSSL                       = Yii::app()->settings->get( Setting::FORCE_SSL );
+        $this->recentEntryWidgetEnabled       = Yii::app()->settings->get( Setting::RECENT_ENTRIES_WIDGET_ENABLED );
+        $this->recentEntryWidgetCount         = Yii::app()->settings->get( Setting::RECENT_ENTRIES_WIDGET_COUNT );
+        $this->mostViewedEntriesWidgetEnabled = Yii::app()->settings->get( Setting::MOST_VIEWED_ENTRIES_WIDGET_ENABLED );
+        $this->mostViewedEntriesWidgetCount   = Yii::app()->settings->get( Setting::MOST_VIEWED_ENTRIES_WIDGET_COUNT );
+
+        return parent::afterConstruct();
     }
 
 }

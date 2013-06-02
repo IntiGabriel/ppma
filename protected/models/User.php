@@ -1,7 +1,6 @@
 <?php
 
 /**
- *
  * @property string  $encryptionKey
  * @property integer $id
  * @property boolean $isAdmin
@@ -13,20 +12,16 @@ class User extends CActiveRecord
 {
 
     /**
-     * (non-PHPdoc)
-     * @see yii/CModel#afterConstruct()
+     * @param string $className
+     * @return CActiveRecord
      */
-    public function afterConstruct()
+    public static function model($className = __CLASS__)
     {
-        $this->salt = md5(rand());
-
-        return parent::afterConstruct();
+        return parent::model($className);
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
+     * @return array
      */
     public function attributeLabels()
     {
@@ -40,11 +35,8 @@ class User extends CActiveRecord
         );
     }
 
-
     /**
-     *
      * @param CEvent $event
-     * @return void
      */
     public function generateEncryptionKey(CEvent $event)
     {
@@ -55,22 +47,8 @@ class User extends CActiveRecord
         }
     }
 
-
     /**
-     *
-     * @param string $className
-     * @return CActiveRecord
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
-    /**
-     *
      * @param CEvent $event
-     * @return void
      */
     public function padPassword(CEvent $event)
     {
@@ -80,10 +58,8 @@ class User extends CActiveRecord
         }
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#relations()
+     * @return array
      */
     public function relations()
     {
@@ -92,10 +68,8 @@ class User extends CActiveRecord
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -119,11 +93,8 @@ class User extends CActiveRecord
         );
     }
 
-
     /**
-     *
      * @param CEvent $event
-     * @return void
      */
     public function saltPassword(CEvent $event)
     {
@@ -133,13 +104,21 @@ class User extends CActiveRecord
         }
     }
 
-
     /**
      * @return string
      */
     public function tableName()
     {
         return 'user';
+    }
+
+    /**
+     * @return void
+     */
+    protected function afterConstruct()
+    {
+        $this->salt = md5(rand());
+        parent::afterConstruct();
     }
 
 }

@@ -8,6 +8,15 @@ class CategoryHasEntry extends CActiveRecord
 {
 
     /**
+     * @param string $className
+     * @return CategoryHasEntry
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
+
+    /**
      * @param int $id
      * @return CategoryHasEntry
      */
@@ -21,17 +30,6 @@ class CategoryHasEntry extends CActiveRecord
         return $this;
     }
 
-
-    /**
-     * @param string $className
-     * @return CategoryHasEntry
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
     /**
      * @return string
      */
@@ -39,7 +37,6 @@ class CategoryHasEntry extends CActiveRecord
     {
         return 'category_has_entry';
     }
-
 
     /**
      * @return array
@@ -51,7 +48,6 @@ class CategoryHasEntry extends CActiveRecord
             array('entryId, categoryId', 'numerical', 'integerOnly' => true),
         );
     }
-
 
     /**
      * @return array

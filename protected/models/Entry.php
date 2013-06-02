@@ -1,7 +1,6 @@
 <?php
 
 /**
- *
  * @property string  $comment
  * @property string  $encryptedPassword
  * @property integer $id
@@ -23,8 +22,16 @@ class Entry extends CActiveRecord
 {
 
     /**
-     * (non-PHPdoc)
-     * @see yii/CModel#attributeLabels()
+     * @param string $className
+     * @return CActiveRecord
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
+
+    /**
+     * @return array
      */
     public function attributeLabels()
     {
@@ -43,10 +50,8 @@ class Entry extends CActiveRecord
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#afterDelete()
+     * @return void
      */
     public function afterDelete()
     {
@@ -55,10 +60,43 @@ class Entry extends CActiveRecord
         return parent::afterDelete();
     }
 
+    /**
+     * @return void
+     */
+    public function deleteTags()
+    {
+        // runs only after delete and update
+        if (in_array($this->scenario, array('update', 'delete')))
+        {
+            $relations = EntryHasTag::model()->entryId($this->id)->findAll();
+
+            foreach ($relations as $relation)
+            {
+                $relation->delete();
+            }
+        }
+    }
 
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#afterSave()
+     * @return void
+     */
+    public function deleteCategories()
+    {
+        // runs only after delete and update
+        if (in_array($this->scenario, array('update', 'delete')))
+        {
+            $relations = CategoryHasEntry::model()->entryId($this->id)->findAll();
+
+            foreach ($relations as $relation)
+            {
+                /* @var CategoryHasEntry $relation */
+                $relation->delete();
+            }
+        }
+    }
+
+    /**
+     * @return void
      */
     public function afterSave()
     {
@@ -107,10 +145,8 @@ class Entry extends CActiveRecord
         }
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#beforeValidate()
+     * @return bool
      */
     public function beforeValidate()
     {
@@ -123,45 +159,9 @@ class Entry extends CActiveRecord
         return parent::beforeValidate();
     }
 
-
     /**
-     * @return void
+     * @return array
      */
-    public function deleteCategories()
-    {
-        // runs only after delete and update
-        if (in_array($this->scenario, array('update', 'delete')))
-        {
-            $relations = CategoryHasEntry::model()->entryId($this->id)->findAll();
-
-            foreach ($relations as $relation)
-            {
-                /* @var CategoryHasEntry $relation */
-                $relation->delete();
-            }
-        }
-    }
-
-
-    /**
-     *
-     * @return void
-     */
-    public function deleteTags()
-    {
-        // runs only after delete and update
-        if (in_array($this->scenario, array('update', 'delete')))
-        {
-            $relations = EntryHasTag::model()->entryId($this->id)->findAll();
-
-            foreach ($relations as $relation)
-            {
-                $relation->delete();
-            }
-        }
-    }
-
-
     public function getCategoryIds()
     {
         $ids = array();
@@ -174,9 +174,7 @@ class Entry extends CActiveRecord
         return $ids;
     }
 
-
     /**
-     *
      * @return string
      */
     public function getPassword()
@@ -189,9 +187,7 @@ class Entry extends CActiveRecord
         return Yii::app()->user->decrypt($this->encryptedPassword);
     }
 
-
     /**
-     *
      * @return string
      */
     public function getIdentifier()
@@ -206,9 +202,7 @@ class Entry extends CActiveRecord
         }
     }
 
-
     /**
-     *
      * @param boolean $asLinks
      * @return string
      */
@@ -236,20 +230,8 @@ class Entry extends CActiveRecord
         return substr(trim($text), 0, -1);
     }
 
-
     /**
-     * @param string $className
-     * @return CActiveRecord
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
-    /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#relations()
+     * @return array
      */
     public function relations()
     {
@@ -260,10 +242,8 @@ class Entry extends CActiveRecord
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -297,9 +277,7 @@ class Entry extends CActiveRecord
         );
     }
 
-
     /**
-     *
      * @return CActiveDataProvider
      */
     public function search()
@@ -358,9 +336,7 @@ class Entry extends CActiveRecord
         ));
     }
 
-
     /**
-     *
      * @param string $v
      * @return void
      */
@@ -375,7 +351,6 @@ class Entry extends CActiveRecord
             $this->encryptedPassword = '';
         }
     }
-
 
     /**
      * @param int[] $v
@@ -396,9 +371,7 @@ class Entry extends CActiveRecord
         }
     }
 
-
     /**
-     *
      * @param string $v
      * @return void
      */
@@ -422,7 +395,6 @@ class Entry extends CActiveRecord
         $this->tags = $tags;
     }
 
-
     /**
      * @return string
      */
@@ -430,7 +402,6 @@ class Entry extends CActiveRecord
     {
         return 'entry';
     }
-
 
     /**
      * @return void

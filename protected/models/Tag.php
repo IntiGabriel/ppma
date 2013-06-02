@@ -1,7 +1,6 @@
 <?php
 
 /**
- *
  * @property Entry[] $entries
  * @property string  $id
  * @property string  $name
@@ -12,8 +11,16 @@ class Tag extends CActiveRecord
 {
 
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#attributeLabels()
+     * @param string $className
+     * @return CActiveRecord
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
+
+    /**
+     * @return array
      */
     public function attributeLabels()
     {
@@ -24,23 +31,19 @@ class Tag extends CActiveRecord
         );
     }
 
-    
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#afterDelete()
+     * @return void
      */
     public function afterDelete()
     {
         // remove Entry relations
         EntryHasTag::model()->deleteAllByAttributes(array('tagId' => $this->id));
-        
+
         return parent::afterDelete();
     }
-    
 
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#beforeValidate()
+     * @return bool
      */
     public function beforeValidate()
     {
@@ -50,10 +53,8 @@ class Tag extends CActiveRecord
         return parent::beforeValidate();
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#defaultScope()
+     * @return array
      */
     public function defaultScope()
     {
@@ -62,26 +63,13 @@ class Tag extends CActiveRecord
         );
     }
 
-    
     /**
-     * 
      * @return int
      */
     public function getEntryCounter()
     {
         return count($this->entries);
     }
-    
-
-    /**
-     *
-     * @return Tag
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
 
     /**
      * Scope
@@ -101,10 +89,8 @@ class Tag extends CActiveRecord
         return $this;
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/CActiveRecord#relations()
+     * @return array
      */
     public function relations()
     {
@@ -114,10 +100,8 @@ class Tag extends CActiveRecord
         );
     }
 
-
     /**
-     * (non-PHPdoc)
-     * @see yii/base/CModel#rules()
+     * @return array
      */
     public function rules()
     {
@@ -134,9 +118,7 @@ class Tag extends CActiveRecord
         );
     }
 
-
     /**
-     *
      * @return CActiveDataProvider
      */
     public function search()
@@ -151,7 +133,6 @@ class Tag extends CActiveRecord
         ));
     }
 
-
     /**
      * @return string
      */
@@ -159,7 +140,6 @@ class Tag extends CActiveRecord
     {
         return 'tag';
     }
-
 
     /**
      * Scope
