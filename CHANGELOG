@@ -10,6 +10,8 @@ Version 0.3.6
 - New: Changed path of session files to /protected/runtime/sessions
 - New: Added categories
 - New: Added some unit-tests
+- New #31: Added time zone
+- Enh #33: Added ## Installation ### Problems in README.md
 
 Version 0.3.5.1
 -------------
