@@ -12,6 +12,7 @@ Version 0.3.6
 - New: Added some unit-tests
 - New #31: Added time zone
 - Enh #33: Added ## Installation ### Problems in README.md
+- Enh: Improved code of the setup routine
 
 Version 0.3.5.1
 -------------
