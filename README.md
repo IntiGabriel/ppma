@@ -16,6 +16,21 @@
    e.g. http://example.com/index.php)
 4. follow the shown setup instructions
 
+### Problems
+
+If you have problems with the installation (e.g. a redirect loop) check that all directories are readable by
+your webserver and the following directories are writable:
+
+* <ppma-directory>/assets
+* <ppma-directory>/protected/runtime
+* <ppma-directory>/protected/runtime/sessions
+
+For debugging uncomment the following lines in the index.php
+
+    //defined('YII_DEBUG') or define('YII_DEBUG',true);
+    //defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+
+Please report founded bugs on https://sourceforge.net/p/ppma/tickets/
 
 ## Upgrading
 
