@@ -40,7 +40,7 @@ Please report founded bugs on https://sourceforge.net/p/ppma/tickets/
 4. copy/overwrite the unpacked files to your ppma directory
 5. run the upgrade routine in your browser
    (`<ppma-URL>/index.php?index.php?r=upgrade`
-   e.g. `http://example.com/index.php?r=upgrade)
+   e.g. `http://example.com/index.php?r=upgrade`)
 
 
 ## Credits
