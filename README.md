@@ -51,3 +51,7 @@ Please report founded bugs on https://sourceforge.net/p/ppma/tickets/
 * [jQuery UI](http://jqueryui.com/)
 * [csvexport Yii extension](http://www.yiiframework.com/extension/csvexport)
 * [This](http://jquery-howto.blogspot.kr/2009/10/javascript-jquery-password-generator.html) for the password generator
+
+## License
+
+This package is licensed under the BSD License. See the LICENSE file for details.
