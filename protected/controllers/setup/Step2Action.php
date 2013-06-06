@@ -141,7 +141,27 @@ class Step2Action extends CAction
             'value' => 'string NOT NULL',
         ));
 
+        // create Category-table
+        try {
+            $command->dropTable('Category');
+        } catch (Exception $e) { }
 
+        $command->createTable('Category', array(
+            'id'       => 'pk',
+            'parentId' => 'int DEFAULT NULL',
+            'name'     => 'string NOT NULL',
+        ));
+
+        // create category_has_entry-table
+        try {
+            $command->dropTable('category_has_entry');
+        } catch (Exception $e) { }
+
+        $command->createTable('category_has_entry', array(
+            'entryId'    => 'integer NOT NULL',
+            'categoryId' => 'integer NOT NULL',
+            'PRIMARY KEY (entryId, categoryId)',
+        ));
     }
 
     /**
@@ -192,6 +212,11 @@ class Step2Action extends CAction
         $model->name = Setting::TAG_CLOUD_WIDGET_POSITION;
         $model->value = 0;
         $model->save(false);
+
+        // add default category
+        $model = new Category();
+        $model->name = 'Main Category';
+        $model->save();
     }
 
 }
