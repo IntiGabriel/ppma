@@ -1,10 +1,8 @@
 <?php $this->beginContent('application.views.layouts.master'); ?>
 
-    <?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/custom-theme/jquery-ui-1.9.2.custom.min.css') ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery-ui-1.9.2.custom.min.js') ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/typeahead.js') ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sidebar.js') ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.bootstrap-growl.min.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.bootstrap-growl.min.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/underscore.min.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.min.js') ?>
 
     <div class="container-fluid">
 
