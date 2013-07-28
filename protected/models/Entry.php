@@ -171,6 +171,10 @@ class Entry extends CActiveRecord
             $ids[] = $category->id;
         }
 
+        if (count($ids) == 0) {
+            $ids[]  = Category::MAIN_CATEGORY_ID;
+        }
+
         return $ids;
     }
 

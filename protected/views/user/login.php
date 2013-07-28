@@ -12,14 +12,13 @@
     <?php echo $form->error($model, 'username'); ?>
 
     <?php echo $form->labelEx($model, 'password'); ?>
-    <div class="row collapse">
-        <div class="ten columns">
-            <?php echo $form->passwordField($model, 'password'); ?>
-        </div>
-        <div class="two columns">
-            <a class="postfix button secondary expand"><i class="foundicon-right-arrow"></i></a>
-        </div>
-    </div>
+    <?php echo $form->passwordField($model, 'password'); ?>
     <?php echo $form->error($model, 'password'); ?>
+
+        <div class="pull-right">
+            <button class="btn btn-primary">
+                Login <i class="icon-chevron-right icon-white"></i>
+            </button>
+        </div>
 
 <?php $this->endWidget(); ?>

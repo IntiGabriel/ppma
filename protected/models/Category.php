@@ -17,6 +17,8 @@ class Category extends CActiveRecord
 
     const NO_PARENT_STRING = 'no parent category';
 
+    const MAIN_CATEGORY_ID = 1;
+
     /**
      * @param string $className
      * @return CActiveRecord

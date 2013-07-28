@@ -12,12 +12,18 @@ return array(
     // preloading 'log' component
 	'preload' => array('log'),
 
+    'aliases' => array(
+        'bootstrap' => realpath(__DIR__ . '/../extensions/bootstrap'),
+        'yiiwheels' => realpath(__DIR__ . '/../extensions/yiiwheels')
+    ),
+
     // autoloading model and component classes
 	'import' => array(
         'application.models.*',
         'application.models.forms.*',
         'application.components.*',
         'application.extensions.chromephp.ChromePhp',
+        'bootstrap.helpers.TbHtml',
     ),
 
     // modules
@@ -27,7 +33,7 @@ return array(
             'password'       => 'password',
             //'ipFilters'      => array('127.0.0.1'),
             'generatorPaths' => array(
-                'ext.gtc',
+                'ext.gtc', 'bootstrap.gii',
             ),
         ),
     ),
@@ -36,6 +42,14 @@ return array(
     'components' => array(
         'session' => array(
             'class' => 'HttpSession',
+        ),
+
+        'bootstrap' => array(
+            'class' => 'bootstrap.components.TbApi',
+        ),
+
+        'yiiwheels'=>array(
+            'class' => 'yiiwheels.YiiWheels',
         ),
 
         'clientScript' => array(
@@ -75,6 +89,7 @@ return array(
     'params' => array(
         'adminEmail'  => 'webmaster@example.com',
         'isInstalled' => $ppma['isInstalled'],
-        'version'     => $ppma['version']
+        'version'     => $ppma['version'],
+        'shortname'   => 'ppma',
     ),
 );

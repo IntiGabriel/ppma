@@ -3,7 +3,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-search.js');
 ?>
 
-<h1>Manage Categories</h1>
+<h2>Manage Categories</h2>
 
 <p>
     You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -24,9 +24,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-s
     )); ?>
 </div>
 
-<?php $this->widget('GridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
-    'cssFile'      => false,
+    'type'         => TbHtml::GRID_TYPE_STRIPED,
     'columns'      => array(
         'name',
         'parentName',

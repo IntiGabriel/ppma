@@ -46,7 +46,7 @@ Please report founded bugs on https://sourceforge.net/p/ppma/tickets/
 ## Credits
 
 * [Yii Framework](http://www.yiiframework.com/)
-* [Foundation](http://foundation.zurb.com/)
+* [Bootstrap](http://twitter.github.io/bootstrap/)
 * [jQuery](http://jquery.com/)
 * [jQuery UI](http://jqueryui.com/)
 * [csvexport Yii extension](http://www.yiiframework.com/extension/csvexport)

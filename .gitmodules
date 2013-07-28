@@ -1,3 +1,9 @@
 [submodule "yii"]
 	path = yii
 	url = https://github.com/yiisoft/yii.git
+[submodule "protected/extensions/bootstrap"]
+	path = protected/extensions/bootstrap
+	url = https://github.com/Crisu83/yiistrap
+[submodule "protected/extensions/yiiwheels"]
+	path = protected/extensions/yiiwheels
+	url = https://github.com/2amigos/yiiwheels

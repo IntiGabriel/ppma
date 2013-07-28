@@ -4,18 +4,20 @@
 /* @var $form ActiveForm */
 ?>
 
-<?php $form = $this->beginWidget('ActiveForm', array(
+<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'action'      => Yii::app()->createUrl($this->route),
 	'method'      => 'get',
     'htmlOptions' => array('class' => 'custom'),
 )); ?>
+    <?php /* @var TbActiveForm $form */ ?>
 
-    <?php $this->widget('CategoryDropdownWidget', array('model' => $model, 'form' => $form)) ?>
+    <?php echo $form->label($model, 'parentId'); ?>
+    <?php echo $form->dropDownList($model, 'parentId', CHtml::listData(Category::model()->findAll(), 'id', 'name')); ?>
 
-    <?php echo $form->label($model,'name'); ?>
-    <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
+    <?php echo $form->label($model, 'name'); ?>
+    <?php echo $form->textField($model, 'name'); ?>
 
-    <?php echo CHtml::submitButton('Search', array('class' => 'secondary button radius')) ?>
+    <?php echo TbHtml::submitButton('Search <i class="icon-search"></i>', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)) ?>
 
     <hr />
 

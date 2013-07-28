@@ -13,7 +13,7 @@ class EntryButtonColumn extends ButtonColumn
      */
     public $buttons = array(
         'website' => array(
-            'label'   => '<i class="foundicon-access-network"></i>',
+            'label'   => '<i class="icon-globe"></i>',
             'url'     => '$data->url',
             'options' => array('title' => 'Visit Website', 'target' => '_blank'),
         ),
@@ -29,13 +29,13 @@ class EntryButtonColumn extends ButtonColumn
 
         // update-button
         $this->buttons['update'] = array(
-            'label'   => '<i class="foundicon-edit"></i>',
+            'label'   => '<i class="icon-edit"></i>',
             'options' => array(
                 'title'          => 'Update',
                 'data-reveal-id' => 'entry-form-modal',
                 'class'          => 'update-entry',
             ),
-            'url'     => 'array("entry/update", "id" => $data->id)',
+            'url'  => 'array("entry/update", "id" => $data->id)',
         );
     }
 

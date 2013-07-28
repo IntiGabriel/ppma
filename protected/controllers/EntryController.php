@@ -79,33 +79,51 @@ class EntryController extends Controller
 
 
     /**
-     * @return void
+     * @throws CHttpException
      */
     public function actionCreate()
     {
-        // create form
+        $request = Yii::app()->request;
+
+        // only ajax- and post-requests are allowed
+        if (!$request->isAjaxRequest || !$request->isPostRequest)
+        {
+            throw new CHttpException(405);
+        }
+
+        // create response
+        $response = array(
+            'error'    => true,
+            'messages' => null,
+        );
+
+        // create model
         $model = new Entry('create');
 
-        // form is submitted
-        if (isset($_POST['Entry']))
+        // get form data
+        $data            = $request->getPost('Entry', array());
+        $data['tagList'] = $request->getPost('tagList');
+
+        // set data to model
+        $model->attributes = $data;
+
+        // save model
+        if($model->save())
         {
-            $model->attributes = $_POST['Entry'];
+            // tracing
+            Yii::trace('Entry created (ID:  ' . $model->id . ')');
 
-            // save model & redirect to index
-            if($model->save())
-            {
-                // tracing
-                Yii::trace('Entry created (ID:  ' . $model->id . ')');
-
-                // set flash
-                Yii::app()->user->setFlash('success', 'The entry was created successfully.');
-
-                // redirect to index
-                $this->redirect(array('index'));
-            }
+            // set message
+            $response['error']      = false;
+            $response['messages'][] = 'The entry was created successfully.';
         }
-        
-        $this->render('create', array('model' => $model));
+        else {
+            $response['messages'] = array_values( $model->getErrors() );
+        }
+
+
+        echo CJSON::encode($response);
+        //$this->render('create', array('model' => $model));
     }
 
 
@@ -118,7 +136,7 @@ class EntryController extends Controller
         // POST request are allowed only
         if(!Yii::app()->request->isPostRequest)
         {
-            throw new CHttpException(400);
+            throw new CHttpException(405)   ;
         }
 
         // get model

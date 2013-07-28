@@ -11,7 +11,7 @@ class ButtonColumn extends CButtonColumn
     /**
      * @var string
      */
-    public $deleteButtonLabel = '<i class="foundicon-remove"></i>';
+    public $deleteButtonLabel = '<i class="icon-remove"></i>';
 
     /**
      * @var array
@@ -36,7 +36,7 @@ class ButtonColumn extends CButtonColumn
     /**
      * @var string
      */
-    public $updateButtonLabel = '<i class="foundicon-edit"></i>';
+    public $updateButtonLabel = '<i class="icon-edit"></i>';
 
     /**
      * @var array
@@ -61,7 +61,7 @@ class ButtonColumn extends CButtonColumn
     /**
      * @var string
      */
-    public $viewButtonLabel = '<i class="foundicon-search"></i>';
+    public $viewButtonLabel = '<i class="icon-eye-open"></i>';
 
     /**
      * @var string

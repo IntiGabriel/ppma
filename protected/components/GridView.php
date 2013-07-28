@@ -25,6 +25,7 @@ class GridView extends CGridView
             'selectedPageCssClass' => 'current',
         );
 
+        $this->itemsCssClass = 'table table-striped table-hover';
         parent::init();
     }
 

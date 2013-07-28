@@ -1,11 +1,9 @@
 <?php $this->beginContent('application.views.layouts.master'); ?>
 
-    <div class="row">
-        <div class="five columns centered" id="login">
-            <div class="row">
-                <div class="ten columns centered">
-                    <?php echo $content; ?>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="offset4 span4" id="login">
+                <?php echo $content; ?>
             </div>
         </div>
     </div>

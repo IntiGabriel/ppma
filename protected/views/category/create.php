@@ -3,6 +3,6 @@
 /* @var $model Category */
 ?>
 
-<h1>Create Category</h1>
+<h2>Create Category</h2>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
