@@ -58,7 +58,8 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo CHtml::link('<i class="icon-pencil"></i> Change Password', array('settings/password')) ?></li>
+                        <li><?php echo CHtml::link('<i class="icon-pencil"></i> Change Password', '#user/password',
+                                array('data-toggle' => 'modal', 'data-target' => '#modal-password')) ?></li>
                         <li><?php echo CHtml::link('<i class="icon-off"></i> Logout', array('/user/logout')) ?></li>
                     </ul>
                 </li>

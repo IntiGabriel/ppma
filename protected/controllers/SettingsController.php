@@ -37,41 +37,54 @@ class SettingsController extends Controller
 
 
     /**
-     *
-     * @return void
+     * @throws CHttpException
      */
     public function actionPassword()
     {
-        $model = new PasswordForm();
+        $request = Yii::app()->request;
 
-        if (isset($_POST['PasswordForm']))
+        if (!$request->isAjaxRequest || !$request->isPostRequest)
         {
-            $model->attributes = $_POST['PasswordForm'];
-
-            if ($model->validate())
-            {
-                // get user from db
-                $user = User::model()->findByPk(Yii::app()->user->id);
-
-                // set new password
-                $user->password = Yii::app()->securityManager->padUserPassword($model->newPassword);
-
-                // encrypt encryptionKey with new password
-                $user->encryptionKey = Yii::app()->securityManager->encrypt(Yii::app()->user->encryptionKey, $user->password);
-
-                // salt password
-                $user->saltPassword(new CEvent());
-
-                // save user record
-                $user->save(false);
-
-                // set success-flash & refresh page
-                Yii::app()->user->setFlash('success', 'Your password was changed successfully.');
-                $this->refresh();
-            }
+            throw new CHttpException(405);
         }
 
-        $this->render('password', array('model' => $model));
+        $response = array(
+            'error'    => true,
+            'messages' => array()
+        );
+
+        // create model an set attributes
+        $model = new PasswordForm();
+        $model->attributes = $request->getPost('PasswordForm', array());
+
+        if ($model->validate())
+        {
+            // get user from db
+            /* @var User $user */
+            $user = User::model()->findByPk(Yii::app()->user->id);
+
+            // set new password
+            $user->password = Yii::app()->securityManager->padUserPassword($model->newPassword);
+
+            // encrypt encryptionKey with new password
+            $user->encryptionKey = Yii::app()->securityManager->encrypt(Yii::app()->user->encryptionKey, $user->password);
+
+            // salt password
+            $user->saltPassword(new CEvent());
+
+            // save user record
+            $user->save(false);
+
+            // set success message
+            $response['error']      = false;
+            $response['messages'][] = 'Your password was changed successfully.';
+        }
+        else
+        {
+            $response['messages'] = array_values( $model->getErrors() );
+        }
+
+        echo CJSON::encode($response);
     }
 
 
@@ -84,7 +97,7 @@ class SettingsController extends Controller
         // only ajax-request are allowed
         if (!Yii::app()->request->isAjaxRequest)
         {
-            throw new CHttpException(400);
+            throw new CHttpException(405);
         }
 
         $availableParams = array(
