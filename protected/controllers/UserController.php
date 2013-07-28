@@ -40,8 +40,10 @@ class UserController extends Controller
             $this->redirect(array('/entry/index'));
         }
 
+        // set layout
         $this->layout = 'login';
 
+        // create model
         $model = new LoginForm();
 
         if(isset($_POST['LoginForm']))

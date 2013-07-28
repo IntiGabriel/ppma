@@ -6,7 +6,7 @@ class Controller extends CController
     /**
      * @var string
      */
-    public $layout = 'column1';
+    public $layout = 'column2';
 
 
     /**
