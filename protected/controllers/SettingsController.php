@@ -43,11 +43,6 @@ class SettingsController extends Controller
     {
         $request = Yii::app()->request;
 
-        if (!$request->isAjaxRequest || !$request->isPostRequest)
-        {
-            throw new CHttpException(405);
-        }
-
         $response = array(
             'error'    => true,
             'messages' => array()
@@ -182,6 +177,8 @@ class SettingsController extends Controller
     {
         return array_merge(array(
             'accessControl',
+            'ajaxOnly + password',
+            'postOnly + password',
         ), parent::filters());
     }
 

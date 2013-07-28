@@ -10,10 +10,10 @@ class CategoryController extends Controller
      */
     public function filters()
     {
-        return array(
+        return array_merge(array(
             'accessControl',
             'postOnly + delete',
-        );
+        ), parent::filters());
     }
 
 

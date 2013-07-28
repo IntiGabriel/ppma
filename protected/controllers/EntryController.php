@@ -85,12 +85,6 @@ class EntryController extends Controller
     {
         $request = Yii::app()->request;
 
-        // only ajax- and post-requests are allowed
-        if (!$request->isAjaxRequest || !$request->isPostRequest)
-        {
-            throw new CHttpException(405);
-        }
-
         // create response
         $response = array(
             'error'    => true,
@@ -284,6 +278,8 @@ class EntryController extends Controller
     {
         return array_merge(array(
             'accessControl',
+            'ajaxOnly + create',
+            'postOnly + create',
         ), parent::filters());
     }
 
