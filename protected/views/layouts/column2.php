@@ -94,7 +94,8 @@
         <footer class="row">
             <div class="span12">
                 * <a href="http://sourceforge.net/projects/ppma/">ppma</a> (version <?php echo Yii::app()->params['version'] ?>)
-                powered by <a href="http://www.yiiframework.com/" target="_blank">Yii Framework</a> (version <?php echo Yii::getVersion() ?>) and
+                powered by <a href="http://www.yiiframework.com/" target="_blank">Yii</a> (version <?php echo Yii::getVersion() ?>),
+                <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> (version 1.0.0) &
                 <a href="http://twitter.github.io/bootstrap/" target="_blank">Bootstrap</a> (version 2.3.2)
             </div>
         </footer>
