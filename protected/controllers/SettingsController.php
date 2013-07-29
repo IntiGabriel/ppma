@@ -79,6 +79,7 @@ class SettingsController extends Controller
             $response['messages'] = array_values( $model->getErrors() );
         }
 
+        header('Content-type: application/json');
         echo CJSON::encode($response);
     }
 

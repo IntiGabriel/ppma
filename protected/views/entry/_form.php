@@ -4,7 +4,6 @@
 
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-password.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/generate-password.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/modal-form.js');
 ?>
 
 <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
