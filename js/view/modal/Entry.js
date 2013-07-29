@@ -14,16 +14,14 @@ $(function() {
 
 
         generatePassword: function() {
-            var passwordField = $('#Entry_password');
-
             // show password field if not shown
-            if (passwordField.attr('type') == 'password') {
+            if ($('#Entry_password').attr('type') == 'password') {
                 this.togglePassword()
             }
 
             // generate and set password
-            passwordField.val($.password(12));
-            passwordField.select();
+            $('#Entry_password').val($.password(12));
+            $('#Entry_password').select();
         },
 
 
@@ -68,7 +66,6 @@ $(function() {
             }
 
             original.replaceWith(clone);
-            clone.select();
         }
 
     });
