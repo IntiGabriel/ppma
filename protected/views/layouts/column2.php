@@ -5,6 +5,7 @@
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/model/Entry.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/view/Navigation.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/view/modal/Entry.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/view/modal/Password.js') ?>
 
