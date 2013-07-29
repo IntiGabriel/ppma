@@ -54,6 +54,8 @@ return array(
 
         'clientScript' => array(
             'scriptMap' => array(
+                'jquery.js'     => 'js/vendor/jquery.min.js',
+                'jquery.min.js' => 'js/vendor/jquery.min.js',
             ),
         ),
 

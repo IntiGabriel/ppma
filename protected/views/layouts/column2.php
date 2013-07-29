@@ -3,10 +3,11 @@
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.bootstrap-growl.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/underscore.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.min.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma.js') ?>
 
     <div class="container-fluid">
 
-        <div class="navbar navbar-fixed-tops">
+        <div id="navigation" class="navbar navbar-fixed-tops">
             <div class="navbar-inner">
 
                 <ul class="nav">
@@ -17,7 +18,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><?php echo CHtml::link('<i class="icon-list-alt"></i> Overview', array('entry/index')) ?></li>
-                            <li><?php echo CHtml::link('<i class="icon-plus-sign"></i> Create', array('entry/create'), array('data-toggle' => 'modal', 'data-target' => '#modal-add-entry')) ?></li>
+                            <li><?php echo CHtml::link('<i class="icon-plus-sign"></i> Create', array('entry/create'),
+                                    array('class' => 'show-entry-modal')) ?></li>
                             <li class="divider"></li>
                             <li><?php echo CHtml::link('<i class="icon-download"></i> Export to CSV', array('export/csv')) ?></li>
                             <li><?php echo CHtml::link('Import from CSV', array('import/csv')) ?></li>
@@ -59,7 +61,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><?php echo CHtml::link('<i class="icon-pencil"></i> Change Password', '#user/password',
-                                    array('data-toggle' => 'modal', 'data-target' => '#modal-password')) ?></li>
+                                    array('class' => 'show-password-modal')) ?></li>
                             <li><?php echo CHtml::link('<i class="icon-off"></i> Logout', array('/user/logout')) ?></li>
                         </ul>
                     </li>

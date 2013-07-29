@@ -1,5 +1,5 @@
 <?php $this->widget('bootstrap.widgets.TbModal', array(
-    'id'      => 'modal-add-entry',
+    'id'      => 'modal-entry',
     'header'  => 'Add Entry',
     'content' => $this->renderPartial('/entry/_form', array('model' => new Entry()), true),
     'footer'  => array(

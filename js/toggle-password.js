@@ -1,5 +1,5 @@
 $(function() {
-	$('a.show-hide-password').live('click', function() {
+	$('a.show-hide-password').on('click', function() {
 		var original = $(this).parent().parent().find('input');
 		var clone    = original.clone();
 		
