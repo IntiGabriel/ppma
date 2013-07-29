@@ -60,9 +60,11 @@ $(function() {
 
             if (original.attr('type') === 'text') {
                 clone.attr('type', 'password');
+                this.$el.find('.toggle-password i').attr('class', 'icon-eye-open');
             }
             else {
                 clone.attr('type', 'text');
+                this.$el.find('.toggle-password i').attr('class', 'icon-eye-close');
             }
 
             original.replaceWith(clone);
