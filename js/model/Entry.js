@@ -1,17 +1,15 @@
 $(function() {
     'use strict';
 
-    var Entry = Backbone.Model.extend({
+    ppma.model.Entry = Backbone.Model.extend({
 
         defaults: {
+            'id':       '',
             'name':     '',
+            'username': '',
             'password': ''
-        },
-
-        urlRoot: 'index.php?r=entry/api'
+        }
 
     });
-
-    window.ppma.model.Entry = new Entry();
 
 });

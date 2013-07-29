@@ -15,8 +15,8 @@ $(function() {
 
         generatePassword: function() {
             // show password field if not shown
-            if ($('#Entry_password').attr('type') == 'password') {
-                this.togglePassword()
+            if ($('#Entry_password').attr('type') === 'password') {
+                this.togglePassword();
             }
 
             // generate and set password
@@ -45,7 +45,7 @@ $(function() {
                     // growl response
                     ppma.Growl.processResponse(response);
 
-                    if (response.error == false) {
+                    if (response.error === false) {
                         this.hide();
                     }
                 }, this));
@@ -58,7 +58,7 @@ $(function() {
             var original = $('#Entry_password');
             var clone    = original.clone();
 
-            if (original.attr('type') == 'text') {
+            if (original.attr('type') === 'text') {
                 clone.attr('type', 'password');
             }
             else {
@@ -71,6 +71,6 @@ $(function() {
     });
 
 
-    window.ppma.view.modal.Entry = new Entry();
+    ppma.view.modal.Entry = new Entry();
 
 });

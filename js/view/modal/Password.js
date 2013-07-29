@@ -42,6 +42,6 @@ $(function() {
 
     });
 
-    window.ppma.view.modal.Password = new Password();
+    ppma.view.modal.Password = new Password();
 
 });

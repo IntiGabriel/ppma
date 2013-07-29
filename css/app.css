@@ -125,6 +125,15 @@ a.button.postfix.second {
     width: auto !important;
 }
 
+.button-column {
+    width: 100px;
+}
+
 .button-column a {
     margin-right: 10px;
+    float: right;
+}
+
+.button-column a:first-child {
+    margin-right: 0px;
 }

@@ -12,6 +12,6 @@ $(function() {
 
     });
 
-    window.ppma.view.Navigation = new Navigation();
+    ppma.view.Navigation = new Navigation();
 
 });

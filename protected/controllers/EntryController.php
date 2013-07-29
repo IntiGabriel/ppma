@@ -40,7 +40,7 @@ class EntryController extends Controller
         return array(
             array(
                 'allow',
-                'actions' => array('create', 'delete', 'getData', 'index', 'update', 'searchName'),
+                'actions' => array('api', 'create', 'delete', 'getData', 'index', 'update', 'searchName'),
                 'users'   => array('@'),
             ),
             array(
@@ -269,6 +269,34 @@ class EntryController extends Controller
     }
 
 
+    public function actionApi()
+    {
+        $models = Entry::model()->findAll();
+        $json   = array();
+
+        $returnedAttributes = array(
+            'id',
+            'name',
+            'username'
+        );
+
+        foreach ($models as $model) {
+            $data = $model->getAttributes($returnedAttributes);
+
+            foreach ($data as $index => $value) {
+                if ($value == null) {
+                    $data[$index] = '';
+                }
+            }
+
+            $json[] = $data;
+        }
+
+        header('Content-type: application/json');
+        echo CJSON::encode($json);
+    }
+
+
     /**
      * (non-PHPdoc)
      * @see yii/web/CController#filters()
@@ -277,7 +305,7 @@ class EntryController extends Controller
     {
         return array_merge(array(
             'accessControl',
-            'ajaxOnly + create',
+            'ajaxOnly + api, create',
             'postOnly + create',
         ), parent::filters());
     }

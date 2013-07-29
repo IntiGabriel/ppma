@@ -1,9 +1,11 @@
 $(function() {
     'use strict';
 
-    window.ppma            = {};
-    window.ppma.model      = {};
-    window.ppma.view       = {};
-    window.ppma.view.modal = {};
+    window.ppma     = {};
+    ppma.collection = {};
+    ppma.model      = {};
+    ppma.view       = {};
+    ppma.view.entry = {};
+    ppma.view.modal = {};
 
 });
