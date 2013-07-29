@@ -310,6 +310,7 @@ class Entry extends CActiveRecord
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $criteria,
+            'pagination' => false,
         ));
     }
 
