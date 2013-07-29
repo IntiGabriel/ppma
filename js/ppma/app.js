@@ -1,6 +1,6 @@
 $(function() {
     'use strict';
 
-    ppma.collection.Entries.fetch();
+    ppma.Collection.Entries.fetch();
 
 });
