@@ -21,16 +21,7 @@
 
 <?php echo TbHtml::buttonGroup(array(
     array('label' => '<i class="icon-plus-sign"></i> Add Entry', 'data-toggle' => 'modal', 'data-target' => '#modal-add-entry'),
-    array('label' => '<i class="icon-search"></i> Advanced Search', 'class' => 'search-button'),
 )); ?>
-
-
-<div class="search-form">
-    <?php $this->renderPartial('_search', array(
-        'model' => $model,
-    )); ?>
-</div>
-
 
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
