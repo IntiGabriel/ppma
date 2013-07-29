@@ -2,7 +2,6 @@
     /* @var Entry $model */
     /* @var CActiveForm $form */
 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-password.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.passwordgenerator.min.js');
 ?>
 
@@ -35,10 +34,10 @@
     <div class="input-append">
         <?php echo $form->passwordField($model, 'password', array('required' => 'true')); ?>
         <div class="add-on">
-            <a class="postfix first button secondary expand generate-password"><i class="icon-random"></i></a>
+            <a class="generate-password"><i class="icon-random"></i></a>
         </div>
         <div class="add-on">
-            <a class="postfix second button secondary expand show-hide-password"><i class="icon-eye-open"></i></a>
+            <a class="toggle-password"><i class="icon-eye-open"></i></a>
         </div>
     </div>
     <?php echo $form->error($model, 'password'); ?>

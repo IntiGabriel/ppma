@@ -6,8 +6,9 @@ $(function() {
         el: '#modal-entry',
 
         events: {
-            'submit form':        'submit',
-            'click .btn-primary': function() { this.$el.find('form').submit(); }
+            'submit form':            'submit',
+            'click .btn-primary':     function() { this.$el.find('form').submit(); },
+            'click .toggle-password': 'togglePassword'
         },
 
 
@@ -37,7 +38,23 @@ $(function() {
                 }, this));
 
             return false;
+        },
+
+
+        togglePassword: function() {
+            var original = $('#Entry_password');
+            var clone    = original.clone();
+
+            if (original.attr('type') == 'text') {
+                clone.attr('type', 'password');
+            }
+            else {
+                clone.attr('type', 'text');
+            }
+
+            original.replaceWith(clone);
         }
+
     });
 
 
