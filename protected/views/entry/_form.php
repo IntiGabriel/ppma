@@ -3,7 +3,7 @@
     /* @var CActiveForm $form */
 
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-password.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/generate-password.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.passwordgenerator.min.js');
 ?>
 
 <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
