@@ -6,9 +6,24 @@ $(function() {
         el: '#modal-entry',
 
         events: {
-            'submit form':            'submit',
-            'click .btn-primary':     function() { this.$el.find('form').submit(); },
-            'click .toggle-password': 'togglePassword'
+            'submit form':              'submit',
+            'click .btn-primary':       function() { this.$el.find('form').submit(); },
+            'click .toggle-password':   'togglePassword',
+            'click .generate-password': 'generatePassword'
+        },
+
+
+        generatePassword: function() {
+            var passwordField = $('#Entry_password');
+
+            // show password field if not shown
+            if (passwordField.attr('type') == 'password') {
+                this.togglePassword()
+            }
+
+            // generate and set password
+            passwordField.val($.password(12));
+            passwordField.select();
         },
 
 
@@ -53,6 +68,7 @@ $(function() {
             }
 
             original.replaceWith(clone);
+            clone.select();
         }
 
     });
