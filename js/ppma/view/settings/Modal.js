@@ -1,7 +1,7 @@
 $(function() {
     'use strict';
 
-    var Password = Backbone.View.extend({
+    var Modal = Backbone.View.extend({
 
         el: '#modal-password',
 
@@ -42,6 +42,7 @@ $(function() {
 
     });
 
-    ppma.view.modal.Password = new Password();
+
+    ppma.View.Settings.Modal = new Modal();
 
 });

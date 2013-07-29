@@ -1,7 +1,7 @@
 $(function() {
     'use strict';
 
-    var Entry = Backbone.View.extend({
+    var Modal = Backbone.View.extend({
 
         el: '#modal-entry',
 
@@ -73,6 +73,6 @@ $(function() {
     });
 
 
-    ppma.view.modal.Entry = new Entry();
+    ppma.View.Entry.Modal = new Modal();
 
 });

@@ -11,7 +11,7 @@ $(function() {
             this.$el.hide();
             this._rowTemplate = this.$el.find('.template.record');
 
-            ppma.collection.Entries.on('add', $.proxy(function(model) {
+            ppma.Collection.Entries.on('add', $.proxy(function(model) {
                 var row = this._rowTemplate.clone().removeClass('hide').hide();
 
                 // set date
@@ -28,6 +28,6 @@ $(function() {
 
     });
 
-    ppma.view.entry.Index = new Index();
+    ppma.View.Entry.Index = new Index();
 
 });

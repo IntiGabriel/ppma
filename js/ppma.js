@@ -1,11 +1,11 @@
 $(function() {
     'use strict';
 
-    window.ppma     = {};
-    ppma.collection = {};
-    ppma.model      = {};
-    ppma.view       = {};
-    ppma.view.entry = {};
-    ppma.view.modal = {};
+    window.ppma        = {};
+    ppma.Collection    = {};
+    ppma.Model         = {};
+    ppma.View          = {};
+    ppma.View.Entry    = {};
+    ppma.View.Settings = {};
 
 });

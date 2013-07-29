@@ -1,7 +1,7 @@
 $(function() {
     'use strict';
 
-    ppma.model.Entry = Backbone.Model.extend({
+    ppma.Model.Entry = Backbone.Model.extend({
 
         defaults: {
             'id':       '',
