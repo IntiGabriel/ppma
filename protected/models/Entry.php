@@ -308,8 +308,38 @@ class Entry extends CActiveRecord
             $criteria->compare('Category.name', $term, true, 'OR');
         }
 
+        // by detail search
+        else
+        {
+            $criteria->compare($alias . '.name', $this->name, true);
+            $criteria->compare($alias . '.url', $this->url, true);
+            $criteria->compare($alias . '.comment', $this->comment);
+            $criteria->compare($alias . '.username', $this->username);
+
+            if (strlen($this->tagList) > 0)
+            {
+                $c = new CDbCriteria();
+                $c->join = 'INNER JOIN EntryHasTag AS eht ON eht.entryId=' . $alias . '.id '
+                         . 'INNER JOIN Tag ON Tag.id=eht.tagId';
+                $c->compare('Tag.name', $this->tagList);
+                $criteria->mergeWith($c);
+            }
+            /*
+
+            if (count($this->categoryIds) > 0)
+            {
+                $c = new CDbCriteria();
+                $c->join = 'INNER JOIN category_has_entry AS che ON che.entryId=' . $alias . '.id '
+                    . 'INNER JOIN Category ON Category.id=che.categoryId';
+                $c->addInCondition('Category.id', $this->categoryIds);
+                $criteria->mergeWith($c);
+            }
+                        */
+
+        }
+
         return new CActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
+            'criteria'   => $criteria,
             'pagination' => false,
         ));
     }
