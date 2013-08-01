@@ -5,7 +5,7 @@ $(function() {
 
         model: ppma.Model.Entry,
 
-        url: 'index.php?r=entry/api'
+        url: 'index.php?r=api/entry'
 
     });
 
