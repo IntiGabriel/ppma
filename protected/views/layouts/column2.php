@@ -1,5 +1,6 @@
 <?php $this->beginContent('application.views.layouts.master'); ?>
 
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/spin.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.bootstrap-growl.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/underscore.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.min.js') ?>

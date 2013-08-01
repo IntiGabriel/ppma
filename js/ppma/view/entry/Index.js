@@ -19,7 +19,7 @@ $(function() {
                 row.find('.username').html(model.get('username'));
                 row.find('.tags').html(model.get('tags'));
 
-                this._rowTemplate.before(row.fadeIn());
+                this._rowTemplate.after(row.fadeIn());
 
                 // show table
                 this.$el.fadeIn();

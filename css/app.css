@@ -137,3 +137,9 @@ a.button.postfix.second {
 .button-column a:first-child {
     margin-right: 0px;
 }
+
+.spinner {
+    position: relative;
+    top: 15px !important;
+    left: 15px !important;
+}

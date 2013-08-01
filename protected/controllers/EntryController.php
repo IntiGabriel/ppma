@@ -40,7 +40,7 @@ class EntryController extends Controller
         return array(
             array(
                 'allow',
-                'actions' => array('api', 'create', 'delete', 'getData', 'index', 'update', 'searchName'),
+                'actions' => array('api', 'delete', 'getData', 'index', 'update', 'searchName'),
                 'users'   => array('@'),
             ),
             array(
@@ -75,48 +75,6 @@ class EntryController extends Controller
 
         // output result as JSON
         echo CJSON::encode($result);
-    }
-
-
-    /**
-     * @throws CHttpException
-     */
-    public function actionCreate()
-    {
-        $request = Yii::app()->request;
-
-        // create response
-        $response = array(
-            'error'    => true,
-            'messages' => null,
-        );
-
-        // create model
-        $model = new Entry('create');
-
-        // get form data
-        $data            = $request->getPost('Entry', array());
-        $data['tagList'] = $request->getPost('tagList');
-
-        // set data to model
-        $model->attributes = $data;
-
-        // save model
-        if($model->save())
-        {
-            // tracing
-            Yii::trace('Entry created (ID:  ' . $model->id . ')');
-
-            // set message
-            $response['error']      = false;
-            $response['messages'][] = 'The entry was created successfully.';
-        }
-        else {
-            $response['messages'] = array_values( $model->getErrors() );
-        }
-
-        header('Content-type: application/json');
-        echo CJSON::encode($response);
     }
 
 
@@ -269,7 +227,10 @@ class EntryController extends Controller
     }
 
 
-    public function actionApi()
+    /**
+     * @return void
+     */
+    protected function get()
     {
         $models = Entry::model()->findAll();
         $json   = array();
@@ -298,6 +259,59 @@ class EntryController extends Controller
 
 
     /**
+     * @return void
+     */
+    protected function put()
+    {
+        $request = Yii::app()->request;
+
+        // create response
+        $response = array(
+            'error'    => true,
+            'messages' => null,
+        );
+
+        // create model
+        $model = new Entry();
+
+        // get data and set to model
+        $_POST           = CJSON::decode($request->getRawBody());
+        $model->name     = $request->getPost('name');
+        $model->username = $request->getPost('username');
+        $model->password = $request->getPost('password');
+
+        // save model
+        if($model->save())
+        {
+            // tracing
+            Yii::trace('Entry created (ID:  ' . $model->id . ')');
+
+            // set message
+            $response['error']      = false;
+            $response['messages'][] = 'The entry was created successfully.';
+        }
+        else
+        {
+            $response['messages'] = array_values($model->getErrors());
+        }
+
+        header('Content-type: application/json');
+        echo CJSON::encode($response);
+    }
+
+
+    public function actionApi()
+    {
+        switch (Yii::app()->request->requestType) {
+            case 'GET':
+                $this->get(); break;
+            case 'PUT':
+                $this->put(); break;
+        }
+    }
+
+
+    /**
      * (non-PHPdoc)
      * @see yii/web/CController#filters()
      */
@@ -305,7 +319,7 @@ class EntryController extends Controller
     {
         return array_merge(array(
             'accessControl',
-            'ajaxOnly + api, create',
+            'ajaxOnly + api',
             'postOnly + create',
         ), parent::filters());
     }

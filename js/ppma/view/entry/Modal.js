@@ -39,16 +39,22 @@ $(function() {
         submit: function() {
             var form = this.$el.find('form');
 
-            // send form as ajax
-            $.post(form.attr('action'), form.serialize())
-                .done($.proxy(function(response) {
-                    // growl response
-                    ppma.Growl.processResponse(response);
+            // create model
+            var model = new ppma.Model.Entry({
+                name:     this.$el.find('[id$=name]:first').val(),
+                username: this.$el.find('[id$=username]:first').val(),
+                password: this.$el.find('[id$=password]:first').val()
+            });
 
-                    if (response.error === false) {
-                        this.hide();
-                    }
-                }, this));
+            // hide modal on sucess
+            model.once('sync', $.proxy(function(model, response) {
+                if (!response.error) {
+                    this.hide();
+                }
+            }, this));
+
+            // save modal
+            model.save();
 
             return false;
         },

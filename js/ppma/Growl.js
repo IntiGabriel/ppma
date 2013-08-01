@@ -7,17 +7,21 @@ $(function() {
             $.bootstrapGrowl(msg, { type: 'error'});
         },
 
+
         success: function(msg) {
             $.bootstrapGrowl(msg, { type: 'success'});
         },
 
-        processResponse: function(response) {
-            $.each(response.messages, function() {
-                if (response.error) {
+
+        processMessages: function(messages, error) {
+            $.each(messages, function() {
+
+                if (error) {
                     ppma.Growl.error(this);
                 } else {
                     ppma.Growl.success(this);
                 }
+
             });
         }
 

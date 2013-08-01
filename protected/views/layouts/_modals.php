@@ -3,6 +3,7 @@
     'header'  => 'Add Entry',
     'content' => $this->renderPartial('/entry/_form', array('model' => new Entry()), true),
     'footer'  => array(
+        '<span id="ajax-load" style=""></span>',
         TbHtml::button('Close', array('data-dismiss' => 'modal')),
         TbHtml::button('Save', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
     ),
