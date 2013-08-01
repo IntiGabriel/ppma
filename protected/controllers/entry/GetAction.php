@@ -6,8 +6,8 @@ class GetAction extends CAction
 
     public function run()
     {
-        $models = Entry::model()->findAll();
-        $json   = array();
+        $models   = Entry::model()->findAll();
+        $response = array();
 
         $returnedAttributes = array(
             'id',
@@ -24,11 +24,10 @@ class GetAction extends CAction
                 }
             }
 
-            $json[] = $data;
+            $response[] = $data;
         }
 
-        header('Content-type: application/json');
-        echo CJSON::encode($json);
+        JSON::response($response);
     }
 
 }

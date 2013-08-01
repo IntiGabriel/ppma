@@ -38,8 +38,7 @@ class PutAction extends CAction
             $response['messages'] = array_values($model->getErrors());
         }
 
-        header('Content-type: application/json');
-        echo CJSON::encode($response);
+        JSON::response($response);
     }
 
 }
