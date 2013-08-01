@@ -3,6 +3,7 @@
 <table id="entry-list" class="table table-striped">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Username</th>
             <th>Tags</th>
@@ -11,6 +12,7 @@
     </thead>
     <tbody>
         <tr class="template record hide">
+            <td class="id" />
             <td class="name" />
             <td class="username" />
             <td class="tags" />

@@ -15,6 +15,7 @@ $(function() {
                 var row = this._rowTemplate.clone().removeClass('hide').hide();
 
                 // set date
+                row.find('.id').html(model.get('id'));
                 row.find('.name').html(model.get('name'));
                 row.find('.username').html(model.get('username'));
                 row.find('.tags').html(model.get('tags'));

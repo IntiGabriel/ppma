@@ -143,3 +143,7 @@ a.button.postfix.second {
     top: 15px !important;
     left: 15px !important;
 }
+
+td.id {
+    width: 40px;
+}
