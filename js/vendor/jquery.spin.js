@@ -1,3 +1,38 @@
+/**
+ * Copyright (c) 2011-2013 Felix Gnass
+ * Licensed under the MIT license
+ */
+
+/*
+
+ Basic Usage:
+ ============
+
+ $('#el').spin(); // Creates a default Spinner using the text color of #el.
+ $('#el').spin({ ... }); // Creates a Spinner using the provided options.
+
+ $('#el').spin(false); // Stops and removes the spinner.
+
+ Using Presets:
+ ==============
+
+ $('#el').spin('small'); // Creates a 'small' Spinner using the text color of #el.
+ $('#el').spin('large', '#fff'); // Creates a 'large' white Spinner.
+
+ Adding a custom preset:
+ =======================
+
+ $.fn.spin.presets.flower = {
+ lines: 9
+ length: 10
+ width: 20
+ radius: 0
+ }
+
+ $('#el').spin('flower', 'red');
+
+ */
+
 (function(factory) {
 
     if (typeof exports == 'object') {
@@ -34,6 +69,10 @@
                 data.spinner = new Spinner(opts).spin(this)
             }
         })
+    }
+
+    $.fn.spin.presets = {
+        modal: { lines: 5, length: 0, width: 11, radius: 0, trail: 50, speed: 1.5 }
     }
 
 }));

@@ -138,8 +138,14 @@ a.button.postfix.second {
     margin-right: 0px;
 }
 
-.spinner {
-    position: relative;
+#content .spinner {
+    position: relative !important;
+    left: 98% !important;
+    top: 10px !important;
+}
+
+.modal-footer .spinner {
+    position: relative !important;
     top: 15px !important;
     left: 15px !important;
 }
