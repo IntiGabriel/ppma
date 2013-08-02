@@ -50,7 +50,7 @@ $(function() {
             ppma.Collection.Entries.on('add', $.proxy(function(model) {
                 var row = this._rowTemplate.clone().removeClass('hide').hide();
 
-                // set date
+                // set data
                 row.find('.id').html(model.id);
                 row.find('.name').html(model.get('name'));
                 row.find('.username').html(model.get('username'));
