@@ -78,6 +78,13 @@ return array(
             'class' => 'SettingsComponent',
         ),
 
+        'urlManager' => array(
+            'rules'     => array(
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>'          => '<controller>/<action>'
+            ),
+        ),
+
         'user' => array(
             'class'          => 'WebUser',
             'loginUrl'       => array('/user/login'),

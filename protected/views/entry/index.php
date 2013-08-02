@@ -17,7 +17,7 @@
             <td class="username" />
             <td class="tags" />
             <td class="button-column">
-                <a href="#"><i class="icon-remove"></i></a>
+                <a href="#"><i class="icon-remove delete"></i></a>
                 <a href="#"><i class="icon-edit"></i></a>
             </td>
         </tr>

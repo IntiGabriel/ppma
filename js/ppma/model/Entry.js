@@ -10,7 +10,6 @@ $(function() {
             'password': ''
         },
 
-        url: 'index.php?r=api/entry',
 
         initialize: function() {
             // handle success-event

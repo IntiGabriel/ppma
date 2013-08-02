@@ -11,7 +11,8 @@ class PutAction extends CAction
         // create response
         $response = array(
             'error'    => true,
-            'messages' => null,
+            'messages' => array(),
+            'data'     => array(),
         );
 
         // create model
@@ -32,6 +33,7 @@ class PutAction extends CAction
             // set message
             $response['error']      = false;
             $response['messages'][] = 'The entry was created successfully.';
+            $response['data']['id'] = $model->id;
         }
         else
         {

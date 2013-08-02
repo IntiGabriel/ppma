@@ -19,3 +19,14 @@
         TbHtml::button('Save', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
     ),
 )); ?>
+
+
+<?php $this->widget('bootstrap.widgets.TbModal', array(
+    'id'      => 'modal-confirm',
+    'header'  => 'Header',
+    'content' => '<div class="message"></div>',
+    'footer'  => array(
+        TbHtml::button('No', array('class' => 'cancel', 'data-dismiss' => 'modal')),
+        TbHtml::button('Yes', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+    ),
+)); ?>

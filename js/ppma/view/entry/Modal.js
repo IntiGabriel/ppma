@@ -54,7 +54,7 @@ $(function() {
             }, this));
 
             // save modal
-            model.save();
+            ppma.Collection.Entries.create(model);
 
             return false;
         },

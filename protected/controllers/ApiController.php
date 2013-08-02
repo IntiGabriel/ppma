@@ -38,6 +38,9 @@ class ApiController extends Controller
             case 'PUT':
                 list($id, $alias, $className) = array('entry-put', 'application.controllers.entry.PutAction', 'PutAction');
                 break;
+
+            case 'DELETE':
+                list($id, $alias, $className) = array('entry-delete', 'application.controllers.entry.DeleteAction', 'DeleteAction');
         }
 
         Yii::import($alias);
