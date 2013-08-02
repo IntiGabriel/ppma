@@ -16,25 +16,22 @@ class DeleteAction extends CAction
 
         $id       = $matches[0];
         $model    = Entry::model()->findByPk($id);
-        $response = array(
-            'error'    => true,
-            'messages' => array()
-        );
+        $response = new Response();
 
 
         if ($model instanceof Entry)
         {
             $model->delete();
-
-            $response['error']      = false;
-            $response['messages'][] = 'Entry deleted!';
+            $response->addMessage('Entry deleted!');
         }
         else
         {
-            $response['messages'][] = 'Entry does not exist';
+            $response
+                ->setError(true)
+                ->addMessage('Entry does not exist');
         }
 
-        JSON::response($response);
+        $response->send();
     }
 
 }

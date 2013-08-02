@@ -47,7 +47,7 @@ $(function() {
             this._rowTemplate = this.$el.find('.template.record');
 
             // added entry to colection
-            ppma.Collection.Entries.on('add', $.proxy(function(model) {
+            ppma.Collection.Entries.on('add', $.proxy(function(model, b, c) {
                 var row = this._rowTemplate.clone().removeClass('hide').hide();
 
                 // set data

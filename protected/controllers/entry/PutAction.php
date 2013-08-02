@@ -9,11 +9,7 @@ class PutAction extends CAction
         $request = Yii::app()->request;
 
         // create response
-        $response = array(
-            'error'    => true,
-            'messages' => array(),
-            'data'     => array(),
-        );
+        $response = new Response();
 
         // create model
         $model = new Entry();
@@ -31,16 +27,18 @@ class PutAction extends CAction
             Yii::trace('Entry created (ID:  ' . $model->id . ')');
 
             // set message
-            $response['error']      = false;
-            $response['messages'][] = 'The entry was created successfully.';
-            $response['data']['id'] = $model->id;
+            $response
+                ->addMessage('The entry was created successfully.')
+                ->addData($model->id, 'id');
         }
         else
         {
-            $response['messages'] = array_values($model->getErrors());
+            $response
+                ->setError(true)
+                ->addMessages( array_values($model->getErrors()) );
         }
 
-        JSON::response($response);
+        $response->send();
     }
 
 }
