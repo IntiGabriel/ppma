@@ -12,6 +12,22 @@ $(function() {
         _rowTemplate: null,
 
 
+        add: function(model) {
+            var row = this._rowTemplate.clone().removeClass('hide').hide();
+
+            // set data
+            row.find('.id').html(model.id);
+            row.find('.name').html(model.get('name'));
+            row.find('.username').html(model.get('username'));
+            row.find('.tags').html(model.get('tags'));
+
+            this._rowTemplate.after(row.fadeIn());
+
+            // show table
+            this.$el.fadeIn();
+        },
+
+
         delete: function(event) {
             var modal = ppma.View.ConfirmModal;
             var id    = $(event.target).closest('tr').find('.id').text();
@@ -43,24 +59,14 @@ $(function() {
 
 
         initialize: function() {
+            // hide table
             this.$el.hide();
+
+            // get template for row
             this._rowTemplate = this.$el.find('.template.record');
 
-            // added entry to colection
-            ppma.Collection.Entries.on('add', $.proxy(function(model, b, c) {
-                var row = this._rowTemplate.clone().removeClass('hide').hide();
-
-                // set data
-                row.find('.id').html(model.id);
-                row.find('.name').html(model.get('name'));
-                row.find('.username').html(model.get('username'));
-                row.find('.tags').html(model.get('tags'));
-
-                this._rowTemplate.after(row.fadeIn());
-
-                // show table
-                this.$el.fadeIn();
-            }), this);
+            // added callback if entry added to collection
+            this.listenTo(ppma.Collection.Entries, 'add', this.add);
 
             // removed entry from collection
             ppma.Collection.Entries.on('remove', $.proxy(function(model) {

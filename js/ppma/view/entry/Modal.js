@@ -6,37 +6,60 @@ $(function() {
         el: '#modal-entry',
 
         events: {
-            'submit form':              'submit',
-            'click .btn-primary':       function() { this.$el.find('form').submit(); },
+            'submit form':              'save',
+            'click .save':              'save',
+            'click .cancel':            'cancel',
             'click .toggle-password':   'togglePassword',
             'click .generate-password': 'generatePassword'
         },
 
 
+        cancel: function() {
+            this.trigger('cancel');
+            this.hide();
+        },
+
+
         generatePassword: function() {
+            var passwordField = this.$el.find('.password');
+
             // show password field if not shown
-            if ($('#Entry_password').attr('type') === 'password') {
+            if (passwordField.attr('type') === 'password') {
                 this.togglePassword();
             }
 
             // generate and set password
-            $('#Entry_password').val($.password(12));
-            $('#Entry_password').select();
+            passwordField.val($.password(12));
+            passwordField.select();
         },
 
 
         hide: function() {
+            // set active ajax-loader to content
+            ppma.AjaxLoader.setActive(ppma.AjaxLoader.ACTIVE_CONTENT);
+
+            // hide modal
             this.$el.modal('hide');
         },
 
 
         show: function() {
+            // empty form
+            this.$el.find(':input').val('');
+
+            // set active ajax-loader to modal
+            ppma.AjaxLoader.setActive(ppma.AjaxLoader.ACTIVE_MODAL);
+
             this.$el.modal('show');
             this.$el.find(':text').first().click().focus();
         },
 
 
-        submit: function() {
+        save: function() {
+            // trigger submit-event
+            this.trigger('submit');
+
+            // get form
             var form = this.$el.find('form');
 
             // create model
@@ -46,22 +69,30 @@ $(function() {
                 password: this.$el.find('[id$=password]:first').val()
             });
 
-            // hide modal on sucess
-            model.once('sync', $.proxy(function(model, response) {
+            // hide modal on success
+            this.listenTo(model, 'sync', function(model, response) {
                 if (!response.error) {
                     this.hide();
                 }
-            }, this));
+            });
 
-            // save modal
-            ppma.Collection.Entries.create(model);
+            // save modal and add to collection
+            ppma.Collection.Entries.create(model, {
+                add: false,
+                wait: true,
+                success: function(model, response) {
+                    model.set('id', response.get('data').id);
+                    ppma.Collection.Entries.add(model);
+                }
+            });
 
             return false;
         },
 
 
         togglePassword: function() {
-            var original = $('#Entry_password');
+            // clone password field
+            var original = this.$el.find('.password');
             var clone    = original.clone();
 
             if (original.attr('type') === 'text') {

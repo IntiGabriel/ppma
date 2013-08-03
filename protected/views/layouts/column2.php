@@ -6,6 +6,7 @@
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/underscore.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/AjaxLoader.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/Growl.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/model/Entry.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/collection/Entries.js') ?>
@@ -88,7 +89,7 @@
 
         <div class="row-fluid">
             <div class="span9" role="content" id="content">
-                <span class="ajax-load"></span>
+                <span class="ajax-load content"></span>
                 <?php echo $content; ?>
             </div>
 

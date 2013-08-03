@@ -4,12 +4,12 @@ $(function() {
     window.ppma.Growl = {
 
         error: function(msg) {
-            $.bootstrapGrowl(msg, { type: 'error'});
+            $.bootstrapGrowl(msg, { type: 'error', delay: 2000});
         },
 
 
         success: function(msg) {
-            $.bootstrapGrowl(msg, { type: 'success'});
+            $.bootstrapGrowl(msg, { type: 'success', delay: 2000});
         },
 
 

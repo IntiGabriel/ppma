@@ -71,8 +71,6 @@
         })
     }
 
-    $.fn.spin.presets = {
-        modal: { lines: 5, length: 0, width: 11, radius: 0, trail: 50, speed: 1.5 }
-    }
+    $.fn.spin.presets = {}
 
 }));

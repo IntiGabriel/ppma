@@ -32,7 +32,7 @@
 
     <?php echo $form->labelEx($model, 'password'); ?>
     <div class="input-append">
-        <?php echo $form->passwordField($model, 'password', array('required' => 'true')); ?>
+        <?php echo $form->passwordField($model, 'password', array('class' => 'password', 'required' => 'true')); ?>
         <div class="add-on">
             <a class="generate-password"><i class="icon-random"></i></a>
         </div>
