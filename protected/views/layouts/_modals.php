@@ -28,7 +28,7 @@
     'content' => '<div class="message"></div>',
     'footer'  => array(
         '<span class="ajax-load dialog"></span>',
-        TbHtml::button('No', array('class' => 'cancel', 'data-dismiss' => 'modal')),
+        TbHtml::button('Cancel', array('class' => 'cancel', 'data-dismiss' => 'modal')),
         TbHtml::button('Yes', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
     ),
 )); ?>

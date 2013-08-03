@@ -7,16 +7,23 @@ $(function() {
 
         events: {
             'click .btn-primary': 'submit',
-            'click .cancel': function() { this.trigger('cancel'); }
+            'click .cancel':      'cancel'
+        },
+
+
+        cancel: function() {
+            this.trigger('cancel');
         },
 
 
         hide: function() {
+            ppma.AjaxLoader.setActive( ppma.AjaxLoader.ACTIVE_CONTENT );
             this.$el.modal('hide');
         },
 
 
         show: function() {
+            ppma.AjaxLoader.setActive( ppma.AjaxLoader.ACTIVE_MODAL );
             this.$el.modal('show');
         },
 
