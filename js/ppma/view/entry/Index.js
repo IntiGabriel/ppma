@@ -6,22 +6,17 @@ $(function() {
         el: '#entry-list',
 
         events: {
-            'click .delete': 'delete'
+            'click .delete': 'delete',
+            'click .edit':   'edit'
         },
 
-        _rowTemplate: null,
+        _rowTemplate: '.template.record',
 
 
         add: function(model) {
-            var row = this._rowTemplate.clone().removeClass('hide').hide();
-
-            // set data
-            row.find('.id').html(model.id);
-            row.find('.name').html(model.get('name'));
-            row.find('.username').html(model.get('username'));
-            row.find('.tags').html(model.get('tags'));
-
-            this._rowTemplate.after(row.fadeIn());
+            // set data to template
+            var template = _.template( this.$el.find(this._rowTemplate).html(), model.attributes);
+            this._rowTemplate.after($(template).fadeIn());
 
             // show table
             this.$el.fadeIn();
@@ -30,7 +25,7 @@ $(function() {
 
         delete: function(event) {
             var modal = ppma.View.ConfirmModal;
-            var id    = $(event.target).closest('tr').find('.id').text();
+            var id    = $(event.currentTarget).attr('rel');
             var model = ppma.Collection.Entries.get(id);
 
             // submit-callback
@@ -55,6 +50,11 @@ $(function() {
             modal.setHeader('Delete Entry #' + id);
             modal.setMessage('Do you really want to delete this entry?');
             modal.show();
+        },
+
+
+        edit: function(event) {
+            ppma.View.Entry.Modal.show();
         },
 
 

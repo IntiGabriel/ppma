@@ -25,6 +25,11 @@ $(function() {
         },
 
 
+        edit: function() {
+
+        },
+
+
         generatePassword: function() {
             var passwordField = this.$el.find('.password');
 

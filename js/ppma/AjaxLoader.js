@@ -13,7 +13,7 @@ $(function() {
 
 
         hide: function() {
-            this.$el.filter('.' + this.active).fadeOut();
+            this.$el.fadeOut();
         },
 
 
