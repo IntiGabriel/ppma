@@ -6,17 +6,21 @@ $(function() {
         el: '#modal-entry',
 
         events: {
-            'submit form':              'save',
-            'click .save':              'save',
+            'submit form':              'submit',
+            'click .save':              'submit',
             'click .cancel':            'cancel',
             'click .toggle-password':   'togglePassword',
             'click .generate-password': 'generatePassword'
         },
 
 
+        bindShortcuts: function() {
+            Mousetrap.bind('enter', $.proxy(this.submit, this));
+        },
+
+
         cancel: function() {
             this.trigger('cancel');
-            this.hide();
         },
 
 
@@ -43,7 +47,18 @@ $(function() {
         },
 
 
+        initialize: function() {
+            this.$el.on('hide', $.proxy(this.unbindShortcuts, this));
+
+            this.listenTo(this, 'show', this.bindShortcuts)
+            this.listenTo(this, 'cancel', this.hide);
+            this.listenTo(this, 'submit', this.save);
+        },
+
+
         show: function() {
+            this.trigger('show');
+
             // empty form
             this.$el.find(':input').val('');
 
@@ -56,9 +71,6 @@ $(function() {
 
 
         save: function() {
-            // trigger submit-event
-            this.trigger('submit');
-
             // get form
             var form = this.$el.find('form');
 
@@ -74,6 +86,9 @@ $(function() {
                 if (!response.error) {
                     this.hide();
                 }
+                else {
+                    ppma.Growl.processMessages(response.messages);
+                }
             });
 
             // save modal and add to collection
@@ -82,11 +97,19 @@ $(function() {
                 wait: true,
                 success: function(model, response) {
                     model.set('id', response.get('data').id);
-                    ppma.Collection.Entries.add(model);
+
+                    if (!response.get('error')) {
+                        ppma.Collection.Entries.add(model);
+                    }
                 }
             });
 
             return false;
+        },
+
+
+        submit: function() {
+            this.trigger('submit');
         },
 
 
@@ -105,6 +128,11 @@ $(function() {
             }
 
             original.replaceWith(clone);
+        },
+
+
+        unbindShortcuts: function() {
+            Mousetrap.unbind('enter');
         }
 
     });
