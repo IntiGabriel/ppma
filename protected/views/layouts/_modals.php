@@ -1,8 +1,9 @@
 <?php $this->widget('bootstrap.widgets.TbModal', array(
-    'id'      => 'modal-entry',
-    'header'  => 'Add Entry',
-    'content' => $this->renderPartial('/entry/_form', array('model' => new Entry()), true),
-    'footer'  => array(
+    'id'       => 'modal-entry',
+    'keyboard' => false,
+    'header'   => 'Add Entry',
+    'content'  => $this->renderPartial('/entry/_form', array('model' => new Entry()), true),
+    'footer'   => array(
         '<span class="ajax-load dialog"></span>',
         TbHtml::button('Close', array('class' => 'cancel')),
         TbHtml::button('Save', array('class' => 'save', 'color' => TbHtml::BUTTON_COLOR_PRIMARY)),

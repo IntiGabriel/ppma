@@ -15,6 +15,7 @@ $(function() {
 
 
         bindShortcuts: function() {
+            Mousetrap.bind('esc', $.proxy(this.cancel, this));
             Mousetrap.bind('enter', $.proxy(this.submit, this));
         },
 
@@ -48,9 +49,8 @@ $(function() {
 
 
         initialize: function() {
-            this.$el.on('hide', $.proxy(this.unbindShortcuts, this));
-
             this.listenTo(this, 'show', this.bindShortcuts)
+            this.listenTo(this, 'cancel', this.unbindShortcuts);
             this.listenTo(this, 'cancel', this.hide);
             this.listenTo(this, 'submit', this.save);
         },
@@ -132,6 +132,7 @@ $(function() {
 
 
         unbindShortcuts: function() {
+            Mousetrap.unbind('esc');
             Mousetrap.unbind('enter');
         }
 
