@@ -54,7 +54,32 @@ $(function() {
 
 
         edit: function(event) {
-            ppma.View.Entry.Modal.show();
+            var id    = $(event.currentTarget).attr('rel');
+            var model = ppma.Collection.Entries.get(id);
+
+            var fillAndShowModal = function(model) {
+                ppma.View.Entry.Modal.fillForm(model);
+                ppma.View.Entry.Modal.show();
+            }
+
+            // fetch password if is not setted
+            if (model.get('password').length == 0) {
+                var password = new ppma.Model.Password({ id: id});
+
+                password.fetch({
+                    success: $.proxy(function(passwordModel) {
+                        // set password to models
+                        passwordModel.set('password', passwordModel.get('data').password);
+                        model.set('password', passwordModel.get('password'));
+
+                        // show modal
+                        fillAndShowModal(model)
+                    }, this)
+                });
+            } else {
+                // show modal
+                fillAndShowModal(model);
+            }
         },
 
 

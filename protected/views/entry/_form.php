@@ -13,7 +13,7 @@
 )); ?>
     <?php /* @var TbActiveForm $form */ ?>
 
-    <?php echo $form->hiddenField($model, 'id'); ?>
+    <?php echo $form->hiddenField($model, 'id', array('class' => 'id')); ?>
 
     <div class="row-fluid" style="margin-bottom: 10px">
         <?php $this->widget('yiiwheels.widgets.multiselect.WhMultiSelect', array(
@@ -23,11 +23,11 @@
     </div>
 
     <?php echo $form->labelEx($model, 'name'); ?>
-    <?php echo $form->textField($model, 'name'); ?>
+    <?php echo $form->textField($model, 'name', array('class' => 'name')); ?>
     <?php echo $form->error($model, 'name'); ?>
 
     <?php echo $form->labelEx($model, 'username'); ?>
-    <?php echo $form->textField($model, 'username'); ?>
+    <?php echo $form->textField($model, 'username', array('class' => 'username')); ?>
     <?php echo $form->error($model, 'username'); ?>
 
     <?php echo $form->labelEx($model, 'password'); ?>
