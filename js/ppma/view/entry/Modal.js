@@ -1,6 +1,14 @@
 $(function() {
     'use strict';
 
+    /**
+     *
+     * @fires submit will be triggered if form is submitted
+     * @fires hide   will be triggered if modal is hidden
+     * @fires show   will be triggered if modal is shown
+     * @fires cancel will be triggered if form is canceled
+     * @type {object}
+     */
     var Modal = Backbone.View.extend({
 
         el: '#modal-entry',
@@ -22,6 +30,9 @@ $(function() {
 
         cancel: function() {
             this.trigger('cancel');
+
+            // hide modal
+            this.hide();
         },
 
 
@@ -48,6 +59,11 @@ $(function() {
 
 
         hide: function() {
+            this.trigger('hide');
+
+            // unbind shortcuts
+            this.unbindShortcuts();
+
             // set active ajax-loader to content
             ppma.AjaxLoader.setActive(ppma.AjaxLoader.ACTIVE_CONTENT);
 
@@ -59,69 +75,20 @@ $(function() {
         },
 
 
-        initialize: function() {
-            this.listenTo(this, 'show', this.bindShortcuts)
-            this.listenTo(this, 'cancel', this.unbindShortcuts);
-            this.listenTo(this, 'cancel', this.hide);
-            this.listenTo(this, 'submit', this.save);
-        },
-
-
         show: function() {
             this.trigger('show');
+
+            // bind shortcuts
+            this.bindShortcuts();
+
+            // add callbacks
+            this.listenTo(this, 'cancel', this.hide);
 
             // set active ajax-loader to modal
             ppma.AjaxLoader.setActive(ppma.AjaxLoader.ACTIVE_MODAL);
 
             this.$el.modal('show');
             this.$el.find(':text').first().click().focus();
-        },
-
-
-        save: function() {
-            // get form
-            var form = this.$el.find('form');
-
-            // set attribues
-            var attributes = {
-                name:     this.$el.find(':input.name').val(),
-                username: this.$el.find(':input.username').val(),
-                password: this.$el.find(':input.password').val()
-            };
-
-            // add id if exist
-            if (this.$el.find(':input.id').val().length > 0) {
-                attributes.id = this.$el.find(':input.id').val();
-            }
-
-            // save model
-            var model = new ppma.Model.Entry(attributes);
-
-            // hide modal on success
-            this.listenTo(model, 'sync', function(model, response) {
-                if (!response.error) {
-                    ppma.Growl.processMessages(response.messages, false);
-                    this.hide();
-                }
-                else {
-                    ppma.Growl.processMessages(response.messages, true);
-                }
-            });
-
-            // save modal and add to collection
-            ppma.Collection.Entries.create(model, {
-                add: false,
-                wait: true,
-                success: function(model, response) {
-                    model.set('id', response.get('data').id);
-
-                    if (!response.get('error')) {
-                        ppma.Collection.Entries.add(model);
-                    }
-                }
-            });
-
-            return false;
         },
 
 

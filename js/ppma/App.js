@@ -2,7 +2,7 @@ $(function() {
     'use strict';
 
     // add shortcuts
-    Mousetrap.bind('alt+c', $.proxy(ppma.View.Entry.Modal.show, ppma.View.Entry.Modal));
+    Mousetrap.bind('alt+c', $.proxy(ppma.View.Entry.Index.create, ppma.View.Entry.Index));
 
     // set template settings
     _.templateSettings = {

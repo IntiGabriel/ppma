@@ -5,81 +5,30 @@ $(function() {
 
         el: '#entry-list',
 
-        events: {
-            'click .delete': 'delete',
-            'click .edit':   'edit'
-        },
-
-        _rowTemplate: '.template.record',
-
 
         add: function(model) {
-            // set data to template
-            var template = _.template( this.$el.find(this._rowTemplate).html(), model.attributes);
-            this._rowTemplate.after($(template).fadeIn());
+            // create row
+            var row = new ppma.View.Entry.Row({ model: model });
+
+            // add row to table
+            this.$el.find('tbody').prepend( row.render() );
 
             // show table
             this.$el.fadeIn();
         },
 
 
-        delete: function(event) {
-            var modal = ppma.View.ConfirmModal;
-            var id    = $(event.currentTarget).attr('rel');
-            var model = ppma.Collection.Entries.get(id);
+        create: function() {
+            // bind callbacks
+            this.listenTo(ppma.View.Entry.Modal, 'submit', this._save);
 
-            // submit-callback
-            var submitCallback = function() {
-                model.destroy({
-                    success: function(model, response) {
-                        ppma.Growl.processMessages(response.messages);
-                    }
-                });
-            };
-
-            // cancel-callback
-            var cancelCallback = function() {
-                modal.off('submit', submitCallback);
-            };
-
-            // bind callbacks to modal
-            modal.once('submit', submitCallback);
-            modal.once('cancel', cancelCallback);
+            // unbind callbacks on Modal#hide
+            this.listenTo(ppma.View.Entry.Modal, 'hide', function() {
+                this.stopListening(ppma.View.Entry.Modal, 'submit', this._save);
+            });
 
             // show modal
-            modal.setHeader('Delete Entry #' + id);
-            modal.setMessage('Do you really want to delete this entry?');
-            modal.show();
-        },
-
-
-        edit: function(event) {
-            var id    = $(event.currentTarget).attr('rel');
-            var model = ppma.Collection.Entries.get(id);
-
-            var fillAndShowModal = function(model) {
-                ppma.View.Entry.Modal.fillForm(model);
-                ppma.View.Entry.Modal.show();
-            }
-
-            // fetch password if is not setted
-            if (model.get('password').length == 0) {
-                var password = new ppma.Model.Password({ id: id});
-
-                password.fetch({
-                    success: $.proxy(function(passwordModel) {
-                        // set password to models
-                        passwordModel.set('password', passwordModel.get('data').password);
-                        model.set('password', passwordModel.get('password'));
-
-                        // show modal
-                        fillAndShowModal(model)
-                    }, this)
-                });
-            } else {
-                // show modal
-                fillAndShowModal(model);
-            }
+            ppma.View.Entry.Modal.show();
         },
 
 
@@ -87,20 +36,56 @@ $(function() {
             // hide table
             this.$el.hide();
 
-            // get template for row
-            this._rowTemplate = this.$el.find('.template.record');
-
-            // added callback if entry added to collection
+            // add callback
             this.listenTo(ppma.Collection.Entries, 'add', this.add);
+        },
 
-            // removed entry from collection
-            ppma.Collection.Entries.on('remove', $.proxy(function(model) {
-                this.$el.find('.id').each(function(index, element) {
-                    if ($(element).text() == model.id) {
-                        $(element).parent().remove();
+
+        /**
+         * @returns {boolean}
+         * @private
+         */
+        _save: function() {
+            var form  = ppma.View.Entry.Modal.$el;
+            var model = new ppma.Model.Entry();
+
+            // get attribues
+            var attributes = {
+                name:     form.find(':input.name').val(),
+                username: form.find(':input.username').val(),
+                password: form.find(':input.password').val()
+            };
+
+            // set attributes to model
+            model.set(attributes);
+
+            // save modal and add to collection
+            ppma.Collection.Entries.create(model, {
+                add: false,
+                wait: true,
+                success: function(model, response) {
+                    // set id to model
+                    model.set('id', response.get('data').id);
+
+                    // no errors
+                    if (!response.get('error')) {
+                        // add model to collection
+                        ppma.Collection.Entries.add(model);
+
+                        // hide modal
+                        ppma.View.Entry.Modal.hide();
+
+                        // growl success message
+                        ppma.Growl.processMessages(response.get('messages'), false);
                     }
-                });
-            }, this));
+                    else {
+                        // growl error messages
+                        ppma.Growl.processMessages(response.get('messages'), true);
+                    }
+                }
+            });
+
+            return false;
         }
 
     });

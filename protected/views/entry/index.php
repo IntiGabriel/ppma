@@ -11,17 +11,18 @@
         </tr>
     </thead>
     <tbody>
-        <script class="record template" type="text/html">
-            <tr>
-                <td class="id">{{ id }}</td>
-                <td>{{ name }}</td>
-                <td>{{ username }}</td>
-                <td></td>
-                <td class="button-column">
-                    <a href="#delete-{{ id }}" class="delete" rel="{{ id }}"><i class="icon-remove"></i></a>
-                    <a href="#edit-{{ id }}" class="edit" rel="{{ id }}"><i class="icon-edit"></i></a>
-                </td>
-            </tr>
-        </script>
+
     </tbody>
 </table>
+
+
+<script id="entry-row-template" type="text/html">
+    <td class="id">{{ id }}</td>
+    <td class="name">{{ name }}</td>
+    <td class="username">{{ username }}</td>
+    <td></td>
+    <td class="button-column">
+        <a href="#delete-{{ id }}" class="delete" rel="{{ id }}"><i class="icon-remove"></i></a>
+        <a href="#edit-{{ id }}" class="edit" rel="{{ id }}"><i class="icon-edit"></i></a>
+    </td>
+</script>
