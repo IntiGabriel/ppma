@@ -41,6 +41,8 @@ $(function() {
             this.$el.find(':input.name').val(model.get('name'));
             this.$el.find(':input.username').val(model.get('username'));
             this.$el.find(':input.password').val(model.get('password'));
+            this.$el.find(':input.url').val(model.get('url'));
+            this.$el.find(':input.comment').val(model.get('comment'));
         },
 
 

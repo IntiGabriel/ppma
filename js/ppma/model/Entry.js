@@ -6,7 +6,9 @@ $(function() {
         defaults: {
             'name':     '',
             'username': '',
-            'password': ''
+            'password': '',
+            'url'     : '',
+            'comment' : ''
         }
 
     });

@@ -53,7 +53,9 @@ $(function() {
             var attributes = {
                 name:     form.find(':input.name').val(),
                 username: form.find(':input.username').val(),
-                password: form.find(':input.password').val()
+                password: form.find(':input.password').val(),
+                url:      form.find(':input.url').val(),
+                comment:  form.find(':input.comment').val()
             };
 
             // set attributes to model

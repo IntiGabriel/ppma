@@ -12,7 +12,9 @@ class GetAction extends CAction
         $returnedAttributes = array(
             'id',
             'name',
-            'username'
+            'username',
+            'url',
+            'comment'
         );
 
         foreach ($models as $model) {

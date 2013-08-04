@@ -31,6 +31,8 @@ class PostPutAction extends CAction
         $model->name     = $request->getPost('name');
         $model->username = $request->getPost('username');
         $model->password = $request->getPost('password');
+        $model->url      = $request->getPost('url');
+        $model->comment  = $request->getPost('comment');
 
         // save model
         if($model->save())
