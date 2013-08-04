@@ -20,7 +20,7 @@
     <td class="id">{{ id }}</td>
     <td class="name">{{ name }}</td>
     <td class="username">{{ username }}</td>
-    <td></td>
+    <td class="tag-list">{{ tagList }}</td>
     <td class="button-column">
         <a href="#delete-{{ id }}" class="delete" rel="{{ id }}"><i class="icon-remove"></i></a>
         <a href="#edit-{{ id }}" class="edit" rel="{{ id }}"><i class="icon-edit"></i></a>

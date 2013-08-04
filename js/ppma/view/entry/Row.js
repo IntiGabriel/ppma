@@ -63,6 +63,15 @@ $(function() {
             var template = _.template( this._template.html(), this.model.attributes );
             this.$el.html(template);
 
+            // format tags
+            var tags = '';
+            _.each( this.$el.find('.tag-list').text().split(','), function(tag) {
+                tags = tags + '<button class="btn btn-mini">' + tag + '</button> ';
+            });
+
+            // add tags
+            this.$el.find('.tag-list').html(tags);
+
             return this.$el;
         },
 
