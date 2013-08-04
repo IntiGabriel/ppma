@@ -1,13 +1,14 @@
 <?php $this->beginContent('application.views.layouts.master'); ?>
 
     <?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/vendor/jquery.tagsinput.css') ?>
+    <?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/vendor/backbone.notifications-min.css') ?>
 
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.tagsinput-1.3.2.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/spin.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.spin.js') ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.bootstrap-growl.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/underscore.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.min.js') ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/backbone.notifications-min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/mousetrap-1.1.4.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/AjaxLoader.js') ?>
@@ -17,7 +18,6 @@
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/collection/Entries.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/view/Navigation.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/view/ConfirmModal.js') ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/view/entry/Grid.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/view/entry/Row.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/view/entry/Modal.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/ppma/view/entry/Index.js') ?>

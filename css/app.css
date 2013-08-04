@@ -175,3 +175,8 @@ div.tagsinput div input {
 thead th.sortable {
     cursor: pointer;
 }
+
+.notifications {
+    z-index: 9999;
+    opacity: 0.9;
+}

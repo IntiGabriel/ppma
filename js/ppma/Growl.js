@@ -1,17 +1,28 @@
 $(function() {
     'use strict';
 
-    window.ppma.Growl = {
+    ppma.Growl = {
+
+        _notification: {},
 
         error: function(msg) {
-            $.bootstrapGrowl(msg, { type: 'error', delay: 2000});
+            this._notification.trigger('error', msg);
         },
+
+
+        initialize: _.once(function() {
+            _.extend(this._notification, Backbone.Events);
+
+            $('body').append(new Notifier({
+                model: this._notification, // your notification object
+                wait: 2000 // the duration of notifications as milliseconds
+            }).render().el);
+        }),
 
 
         success: function(msg) {
-            $.bootstrapGrowl(msg, { type: 'success', delay: 2000});
+            this._notification.trigger('success', msg);
         },
-
 
         processMessages: function(messages, error) {
             $.each(messages, function() {
@@ -26,5 +37,7 @@ $(function() {
         }
 
     };
+
+    ppma.Growl.initialize();
 
 });
