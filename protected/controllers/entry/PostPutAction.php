@@ -16,6 +16,7 @@ class PostPutAction extends CAction
         if ($request->getPost('id', false))
         {
             $model = Entry::model()->findByPk($request->getPost('id'));
+            $model->scenario = 'update';
 
             if (!is_object($model))
             {
@@ -24,7 +25,7 @@ class PostPutAction extends CAction
         }
         else
         {
-            $model = new Entry();
+            $model = new Entry('create');
         }
 
         // set data to model
@@ -33,6 +34,7 @@ class PostPutAction extends CAction
         $model->password = $request->getPost('password');
         $model->url      = $request->getPost('url');
         $model->comment  = $request->getPost('comment');
+        $model->tagList  = $request->getPost('tagList');
 
         // save model
         if($model->save())

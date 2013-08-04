@@ -47,16 +47,8 @@
     <?php echo $form->error($model, 'url'); ?>
 
     <?php echo $form->labelEx($model, 'tagList'); ?>
-    <?php $this->widget('yiiwheels.widgets.select2.WhSelect2', array(
-        'asDropDownList' => false,
-        'name'           => 'tagList',
-        'pluginOptions'  => array(
-            'tags'            => array_keys( CHtml::listData(Tag::model()->findAll(), 'name', 'name') ),
-            'tokenSeparators' => array(',', ' ')
-    ))); ?>
+    <?php echo $form->urlField($model, 'tagList', array('class' => 'tagList')); ?>
     <?php echo $form->error($model, 'tagList'); ?>
-
-
 
     <?php echo $form->labelEx($model, 'comment'); ?>
     <?php echo $form->textArea($model, 'comment', array('class' => 'comment', 'rows' => 5)); ?>

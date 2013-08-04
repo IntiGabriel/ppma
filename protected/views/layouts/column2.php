@@ -1,5 +1,8 @@
 <?php $this->beginContent('application.views.layouts.master'); ?>
 
+    <?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/vendor/jquery.tagsinput.css') ?>
+
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.tagsinput-1.3.2.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/spin.min.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.spin.js') ?>
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/vendor/jquery.bootstrap-growl.min.js') ?>

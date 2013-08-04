@@ -18,6 +18,8 @@ class GetAction extends CAction
         );
 
         foreach ($models as $model) {
+            /* @var Entry $model */
+
             $data = $model->getAttributes($returnedAttributes);
 
             foreach ($data as $index => $value) {
@@ -25,6 +27,9 @@ class GetAction extends CAction
                     $data[$index] = '';
                 }
             }
+
+            // add tagList
+            $data['tagList'] = $model->getTagList();
 
             $response->addData($data);
         }

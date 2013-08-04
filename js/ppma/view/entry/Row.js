@@ -80,7 +80,8 @@ $(function() {
                 username: form.find(':input.username').val(),
                 password: form.find(':input.password').val(),
                 url:      form.find(':input.url').val(),
-                comment:  form.find(':input.comment').val()
+                comment:  form.find(':input.comment').val(),
+                tagList:  form.find(':input.tagList').val()
             };
 
             // set attributes to model

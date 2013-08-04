@@ -43,6 +43,7 @@ $(function() {
             this.$el.find(':input.password').val(model.get('password'));
             this.$el.find(':input.url').val(model.get('url'));
             this.$el.find(':input.comment').val(model.get('comment'));
+            this.$el.find(':input.tagList').importTags(model.get('tagList'));
         },
 
 
@@ -71,9 +72,17 @@ $(function() {
 
             // empty form
             this.$el.find(':input').val('');
+            this.$el.find(':input.tagList').importTags('');
 
             // hide modal
             this.$el.modal('hide');
+        },
+
+
+        initialize: function() {
+            this.$el.find(':input.tagList').tagsInput({
+                defaultText: ''
+            });
         },
 
 

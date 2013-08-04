@@ -8,7 +8,8 @@ $(function() {
             'username': '',
             'password': '',
             'url'     : '',
-            'comment' : ''
+            'comment' : '',
+            'tagList' : ''
         }
 
     });

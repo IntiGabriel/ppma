@@ -107,16 +107,6 @@ a.button.postfix.second {
     margin-top: 10px;
 }
 
-.select2-container {
-    width: 99%;
-    margin-bottom: 10px;
-}
-
-.select2-choices {
-    border-color: #ccc;
-    border-radius: 4px;
-}
-
 .search-form {
     padding-top: 10px;
 }
@@ -152,4 +142,28 @@ a.button.postfix.second {
 
 td.id {
     width: 40px;
+}
+
+div.tagsinput {
+    border-color: #ccc;
+    border-radius: 4px;
+    width: 97% !important;
+    height: 20px !important;
+    margin-bottom: 10px;
+}
+
+div.tagsinput .tag {
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(230, 230, 230)) !important;
+    line-height: 0.65em !important;
+}
+
+div.tagsinput div {
+    line-height: 0.65em !important;
+}
+
+div.tagsinput div input {
+    padding-top: 4px;
+    height: 1em !important;
+    margin-bottom: 0px !important;
+    width: 60px !important;
 }

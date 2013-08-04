@@ -227,7 +227,7 @@ class Entry extends CActiveRecord
             }
             else
             {
-                $text .= $tag->name . ', ';
+                $text .= $tag->name . ',';
             }
         }
 
