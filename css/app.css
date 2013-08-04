@@ -171,3 +171,7 @@ div.tagsinput div input {
     margin-bottom: 0px !important;
     width: 60px !important;
 }
+
+thead th.sortable {
+    cursor: pointer;
+}

@@ -3,9 +3,9 @@
 <table id="entry-list" class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Username</th>
+            <th class="sortable" rel="id">ID <i /></th>
+            <th class="sortable" rel="name">Name <i /></th>
+            <th class="sortable" rel="username">Username <i /></th>
             <th>Tags</th>
             <th></th>
         </tr>

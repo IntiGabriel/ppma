@@ -5,6 +5,10 @@ $(function() {
 
         el: '#entry-list',
 
+        events: {
+            'click th.sortable': 'sort'
+        },
+
 
         add: function(model) {
             // create row
@@ -14,7 +18,19 @@ $(function() {
             this.$el.find('tbody').prepend( row.render() );
 
             // show table
-            this.$el.fadeIn();
+            //this.$el.fadeIn();
+        },
+
+
+        refresh: function() {
+            this.$el.find('tbody').empty();
+
+            this.$el.find('table').attr('class', 'table table-striped');
+            this.$el.find('td').removeAttr('class');
+
+            _.each(ppma.Collection.Entries.models, $.proxy(function(model) {
+                this.add(model);
+            }, this));
         },
 
 
@@ -36,8 +52,14 @@ $(function() {
             // hide table
             this.$el.hide();
 
-            // add callback
-            this.listenTo(ppma.Collection.Entries, 'add', this.add);
+            // add callbacks
+            this.listenTo(ppma.Collection.Entries, 'add', this.refresh);
+            this.listenTo(ppma.Collection.Entries, 'sort', this.refresh);
+
+            // show table after first load
+            this.listenToOnce(ppma.Collection.Entries, 'sync', function() {
+                this.$el.fadeIn();
+            });
         },
 
 
@@ -89,6 +111,12 @@ $(function() {
             });
 
             return false;
+        },
+
+
+        sort: function(event) {
+            ppma.Collection.Entries.sortAttribute = $(event.target).attr('rel');
+            ppma.Collection.Entries.sort();
         }
 
     });

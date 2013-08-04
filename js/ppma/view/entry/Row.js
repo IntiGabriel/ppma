@@ -66,7 +66,9 @@ $(function() {
             // format tags
             var tags = '';
             _.each( this.$el.find('.tag-list').text().split(','), function(tag) {
-                tags = tags + '<button class="btn btn-mini">' + tag + '</button> ';
+                if (tag.length > 0) {
+                    tags = tags + '<button class="btn btn-mini">' + tag + '</button> ';
+                }
             });
 
             // add tags
