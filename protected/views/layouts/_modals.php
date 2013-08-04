@@ -26,6 +26,7 @@
 <?php $this->widget('bootstrap.widgets.TbModal', array(
     'id'      => 'modal-confirm',
     'header'  => 'Header',
+    'keyboard' => false,
     'content' => '<div class="message"></div>',
     'footer'  => array(
         '<span class="ajax-load dialog"></span>',

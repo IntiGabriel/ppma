@@ -31,6 +31,7 @@ $(function() {
                 });
 
                 this.$el.remove();
+                modal.hide();
             };
 
             // cancel-callback
