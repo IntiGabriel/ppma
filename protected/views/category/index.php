@@ -1,8 +1,3 @@
-<?php
-// register scripts
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-search.js');
-?>
-
 <h2>Manage Categories</h2>
 
 <p>

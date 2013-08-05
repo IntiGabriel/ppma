@@ -1,15 +1,9 @@
 <?php
-    $this->breadcrumbs = array(
-        'Tags' => array('index'),
-        'Manage',
-    );
 
     $this->menu = array(
         array('label' => 'Create Tag', 'url' => array('create'), 'linkOptions' => array('rel' => 'fancy')),
     );
 
-    // register scripts
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/toggle-search.js');
 ?>
 
 <h1>Manage Tags</h1>

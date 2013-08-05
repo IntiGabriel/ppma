@@ -1,11 +1,6 @@
 <?php
     /* @var Entry $model */
 
-    $this->breadcrumbs = array(
-        'Entries' => array('index'),
-        'Create',
-    );
-
     $this->menu = array(
 	   array('label' => 'Manage Entries', 'url' => array('index')),
     );

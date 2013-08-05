@@ -1,8 +1,4 @@
 <?php
-    $this->breadcrumbs = array(
-        'Tags' => array('index'),
-        'Create',
-    );
 
     $this->menu = array(
 	   array('label' => 'Manage Tags', 'url' => array('index')),
