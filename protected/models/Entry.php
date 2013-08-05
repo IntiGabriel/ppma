@@ -56,7 +56,6 @@ class Entry extends CActiveRecord
     public function afterDelete()
     {
         $this->deleteTags();
-        $this->deleteCategories();
         return parent::afterDelete();
     }
 
