@@ -51,8 +51,9 @@ $(function() {
 
 
         initialize: function() {
-            this.listenTo(this.model, 'change:name', this._updateName);
-            this.listenTo(this.model, 'change:username', this._updateUsername);
+            this.listenTo(this.model, 'change:name', this.render);
+            this.listenTo(this.model, 'change:username', this.render);
+            this.listenTo(this.model, 'change:tagList', this.render);
         },
 
 
@@ -163,22 +164,6 @@ $(function() {
                 // show modal
                 fillAndShowModal(this.model);
             }
-        },
-
-
-        /**
-         * @private
-         */
-        _updateName: function(model) {
-            this.$el.find('.name').text(this.model.get('name'));
-        },
-
-
-        /**
-         * @private
-         */
-        _updateUsername: function(model) {
-            this.$el.find('.username').text(this.model.get('username'));
         }
 
     });
