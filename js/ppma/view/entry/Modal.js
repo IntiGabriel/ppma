@@ -43,6 +43,7 @@ $(function() {
             this.$el.find(':input.password').val(model.get('password'));
             this.$el.find(':input.url').val(model.get('url'));
             this.$el.find(':input.comment').val(model.get('comment'));
+            this.$el.find(':input.categoryId').val(model.get('categoryId'));
             this.$el.find(':input.tagList').importTags(model.get('tagList'));
         },
 

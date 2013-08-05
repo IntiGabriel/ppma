@@ -14,7 +14,8 @@ class GetAction extends CAction
             'name',
             'username',
             'url',
-            'comment'
+            'comment',
+            'categoryId',
         );
 
         foreach ($models as $model) {

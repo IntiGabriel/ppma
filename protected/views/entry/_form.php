@@ -15,12 +15,9 @@
 
     <?php echo $form->hiddenField($model, 'id', array('class' => 'id')); ?>
 
-    <div class="row-fluid" style="margin-bottom: 10px">
-        <?php $this->widget('yiiwheels.widgets.multiselect.WhMultiSelect', array(
-            'name' => 'Entry[categoryIds]',
-            'data' => CHtml::listData(Category::model()->findAll(), 'id', 'name'),
-        )); ?>
-    </div>
+    <?php echo $form->dropDownList($model, 'categoryId', CHtml::listData(Category::model()->findAll(), 'id', 'name'), array('class' => 'categoryId')); ?>
+    <?php echo $form->error($model, 'categoryId'); ?>
+
 
     <?php echo $form->labelEx($model, 'name'); ?>
     <?php echo $form->textField($model, 'name', array('class' => 'name')); ?>

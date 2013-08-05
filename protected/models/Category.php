@@ -75,7 +75,7 @@ class Category extends CActiveRecord
         return array(
             'childs'  => array(self::HAS_MANY, 'Category', 'parentId'),
             'parent'  => array(self::BELONGS_TO, 'Category', 'parentId'),
-            'entries' => array(self::MANY_MANY, 'Category', 'category_has_entry(categoryId, entryId)'),
+            'entries' => array(self::HAS_MANY, 'Entry', 'categoryId'),
         );
     }
 

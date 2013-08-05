@@ -89,12 +89,13 @@ $(function() {
 
             // get attribues
             var attributes = {
-                name:     form.find(':input.name').val(),
-                username: form.find(':input.username').val(),
-                password: form.find(':input.password').val(),
-                url:      form.find(':input.url').val(),
-                comment:  form.find(':input.comment').val(),
-                tagList:  form.find(':input.tagList').val()
+                name:       form.find(':input.name').val(),
+                username:   form.find(':input.username').val(),
+                password:   form.find(':input.password').val(),
+                url:        form.find(':input.url').val(),
+                comment:    form.find(':input.comment').val(),
+                tagList:    form.find(':input.tagList').val(),
+                categoryId: form.find(':input.categoryId').val()
             };
 
             // set attributes to model

@@ -4,12 +4,13 @@ $(function() {
     ppma.Model.Entry = Backbone.Model.extend({
 
         defaults: {
-            'name':     '',
-            'username': '',
-            'password': '',
-            'url'     : '',
-            'comment' : '',
-            'tagList' : ''
+            'name':       '',
+            'categoryId': '1',
+            'username':   '',
+            'password':   '',
+            'url'     :   '',
+            'comment' :   '',
+            'tagList' :   ''
         }
 
     });

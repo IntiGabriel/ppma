@@ -14,9 +14,9 @@
  * @property integer $userId
  * @property string  $username
  * @property int     $viewCount
+ * @property int     $categoryId
  *
- * @property Category[] $categories
- * @property int[] $categoryIds
+ * @property Category $category
  */
 class Entry extends CActiveRecord
 {
@@ -37,8 +37,8 @@ class Entry extends CActiveRecord
     {
         return array(
             'comment'     => 'Comment',
-            'categories'  => 'Categories',
-            'categoryIds' => 'Categories',
+            'category'    => 'Category',
+            'categoryId'  => 'Category',
             'id'          => 'ID',
             'name'        => 'Name',
             'password'    => 'Password',
@@ -77,23 +77,6 @@ class Entry extends CActiveRecord
         }
     }
 
-    /**
-     * @return void
-     */
-    public function deleteCategories()
-    {
-        // runs only after delete and update
-        if (in_array($this->scenario, array('update', 'delete')))
-        {
-            $relations = CategoryHasEntry::model()->entryId($this->id)->findAll();
-
-            foreach ($relations as $relation)
-            {
-                /* @var CategoryHasEntry $relation */
-                $relation->delete();
-            }
-        }
-    }
 
     /**
      * @return void
@@ -128,19 +111,6 @@ class Entry extends CActiveRecord
                 $relation->save();
             }
 
-            // delete all categories
-            $this->deleteCategories();
-
-            // save categories
-            foreach ($this->categories as $category)
-            {
-                /* @var Category $category */
-                $relation = new CategoryHasEntry();
-                $relation->entryId    = $this->id;
-                $relation->categoryId = $category->id;
-                $relation->save();
-            }
-
             return parent::afterSave();
         }
     }
@@ -159,24 +129,6 @@ class Entry extends CActiveRecord
         return parent::beforeValidate();
     }
 
-    /**
-     * @return array
-     */
-    public function getCategoryIds()
-    {
-        $ids = array();
-
-        foreach ($this->categories as $category)
-        {
-            $ids[] = $category->id;
-        }
-
-        if (count($ids) == 0) {
-            $ids[]  = Category::MAIN_CATEGORY_ID;
-        }
-
-        return $ids;
-    }
 
     /**
      * @return string
@@ -240,9 +192,9 @@ class Entry extends CActiveRecord
     public function relations()
     {
         return array(
-            'user'       => array(self::BELONGS_TO, 'User', 'userId'),
-            'tags'       => array(self::MANY_MANY, 'Tag', 'EntryHasTag(entryId, tagId)'),
-            'categories' => array(self::MANY_MANY, 'Category', 'category_has_entry(entryId, categoryId)'),
+            'user'     => array(self::BELONGS_TO, 'User', 'userId'),
+            'tags'     => array(self::MANY_MANY, 'Tag', 'EntryHasTag(entryId, tagId)'),
+            'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
         );
     }
 
@@ -254,7 +206,7 @@ class Entry extends CActiveRecord
         return array(
             array('comment', 'default', 'value' => NULL),
 
-            array('categoryIds', 'safe'),
+            array('categoryId', 'exist', 'className' => 'Category', 'attributeName' => 'id'),
 
             array('id', 'safe', 'on'=>'search'),
 
@@ -324,18 +276,6 @@ class Entry extends CActiveRecord
                 $c->compare('Tag.name', $this->tagList);
                 $criteria->mergeWith($c);
             }
-            /*
-
-            if (count($this->categoryIds) > 0)
-            {
-                $c = new CDbCriteria();
-                $c->join = 'INNER JOIN category_has_entry AS che ON che.entryId=' . $alias . '.id '
-                    . 'INNER JOIN Category ON Category.id=che.categoryId';
-                $c->addInCondition('Category.id', $this->categoryIds);
-                $criteria->mergeWith($c);
-            }
-                        */
-
         }
 
         $criteria->limit = 0;
@@ -358,25 +298,6 @@ class Entry extends CActiveRecord
         else
         {
             $this->encryptedPassword = '';
-        }
-    }
-
-    /**
-     * @param int[] $v
-     */
-    public function setCategoryIds($v)
-    {
-        if (is_array($v))
-        {
-            foreach ($v as $id)
-            {
-                $category = Category::model()->findByPk($id);
-
-                if ($category instanceof Category)
-                {
-                    $this->categories = array_merge($this->categories, array($category));
-                }
-            }
         }
     }
 
