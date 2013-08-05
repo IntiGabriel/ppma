@@ -7,7 +7,7 @@ $(function() {
 
         events: {
             'click .delete': '_delete',
-            'click .edit':   '_update'
+            'click .edit':   function() { ppma.View.Entry.Modal.update(this.model); }
         },
 
         model: null,
@@ -79,94 +79,6 @@ $(function() {
             return this;
         },
 
-
-        /**
-         * @private
-         */
-        _save: function() {
-            var form  = ppma.View.Entry.Modal.$el;
-            var model = this.model;
-
-            // get attribues
-            var attributes = {
-                name:       form.find(':input.name').val(),
-                username:   form.find(':input.username').val(),
-                password:   form.find(':input.password').val(),
-                url:        form.find(':input.url').val(),
-                comment:    form.find(':input.comment').val(),
-                tagList:    form.find(':input.tagList').val(),
-                categoryId: form.find(':input.categoryId').val()
-            };
-
-            // set attributes to model
-            model.set(attributes);
-
-            // save modal and add to collection
-            ppma.Collection.Entries.create(model, {
-                add: false,
-                wait: true,
-                success: function(model, response) {
-                    // set id to model
-                    model.set('id', response.get('data').id);
-
-                    // no errors
-                    if (!response.get('error')) {
-                        // add model to collection
-                        ppma.Collection.Entries.add(model);
-
-                        // hide modal
-                        ppma.View.Entry.Modal.hide();
-
-                        // growl success message
-                        ppma.Growl.processMessages(response.get('messages'), false);
-                    }
-                    else {
-                        // growl error messages
-                        ppma.Growl.processMessages(response.get('messages'), true);
-                    }
-                }
-            });
-
-            return false;
-        },
-
-
-        /**
-         * @private
-         */
-        _update: function() {
-            // add save-callback
-            this.listenTo(ppma.View.Entry.Modal, 'submit', this._save);
-
-            // remoave callback
-            this.listenTo(ppma.View.Entry.Modal, 'hide', function() {
-                this.stopListening(ppma.View.Entry.Modal, 'submit', this._save);
-            });
-
-            var fillAndShowModal = function(model) {
-                ppma.View.Entry.Modal.fillForm(model);
-                ppma.View.Entry.Modal.show();
-            }
-
-            // fetch password if is not setted
-            if (this.model.get('password').length == 0) {
-                var password = new ppma.Model.Password({ id: this.model.id });
-
-                password.fetch({
-                    success: $.proxy(function(model) {
-                        // set password to models
-                        model.set('password', model.get('data').password);
-                        this.model.set('password', model.get('password'));
-
-                        // show modal
-                        fillAndShowModal(this.model)
-                    }, this)
-                });
-            } else {
-                // show modal
-                fillAndShowModal(this.model);
-            }
-        }
 
     });
 

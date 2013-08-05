@@ -17,6 +17,7 @@
 
 <?php if (count($models) > 0) : ?>
 
+
     <?php foreach ($models as $model) : ?>
         <?php /* @var Setting $model */ ?>
 
@@ -30,23 +31,27 @@
 
         <?php elseif ($model->name == Setting::RECENT_ENTRIES_WIDGET_POSITION) : ?>
             <?php if (Yii::app()->settings->getAsBool(Setting::RECENT_ENTRIES_WIDGET_ENABLED)) : ?>
-                <?php $this->widget('ext.RecentEntriesWidget.RecentEntriesWidget') ?>
+                <script id="sidebar-recent-entries-template" type="text/template">
+                    <div id="recent-entries" class="well well-small">
+                        <div class="settings"><i class="icon-move"></i></div>
+
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Recent Entries</li>
+                        </ul>
+
+                    </div>
+
+                    <?php //$this->widget('ext.RecentEntriesWidget.RecentEntriesWidget') ?>
+                </script>
+
+                <script id="sidebar-recent-entries-row-template" type="text/template">
+                    <li><a>{{ name }}</a></li>
+                </script>
             <?php endif; ?>
 
         <?php endif; ?>
 
     <?php endforeach; ?>
 
-<?php else : ?>
-
-    <?php $this->widget('ext.TagCloudWidget.TagCloudWidget') ?>
-
-    <?php if (Yii::app()->settings->getAsBool(Setting::MOST_VIEWED_ENTRIES_WIDGET_ENABLED)) : ?>
-        <?php $this->widget('ext.MostViewedEntriesWidget.MostViewedEntriesWidget') ?>
-    <?php endif; ?>
-
-    <?php if (Yii::app()->settings->getAsBool(Setting::RECENT_ENTRIES_WIDGET_ENABLED)) : ?>
-        <?php $this->widget('ext.RecentEntriesWidget.RecentEntriesWidget') ?>
-    <?php endif; ?>
 
 <?php endif; ?>

@@ -7,6 +7,7 @@ $(function() {
     ppma.View          = {};
     ppma.View.Entry    = {};
     ppma.View.Settings = {};
+    ppma.View.Sidebar  = {};
 
 
 
