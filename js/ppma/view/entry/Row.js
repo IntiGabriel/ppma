@@ -75,7 +75,8 @@ $(function() {
             // add tags
             this.$el.find('.tag-list').html(tags);
 
-            return this.$el;
+            // make chainable
+            return this;
         },
 
 
