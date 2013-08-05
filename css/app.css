@@ -172,6 +172,10 @@ div.tagsinput div input {
     width: 60px !important;
 }
 
+div.tagsinput span.tag a {
+    color: #333 !important;
+}
+
 thead th.sortable {
     cursor: pointer;
 }
