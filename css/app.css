@@ -41,6 +41,18 @@ input, textarea {
     letter-spacing: 1px;
 }
 
+.well div.load {
+    position: absolute;
+    right: 62px;
+    display: block;
+}
+
+.well div.load .spinner {
+    position: relative !important;
+    top: 10px !important;
+
+}
+
 .well div.settings {
     position: absolute;
     right: 32px;

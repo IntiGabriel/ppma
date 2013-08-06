@@ -33,6 +33,7 @@
             <?php if (Yii::app()->settings->getAsBool(Setting::RECENT_ENTRIES_WIDGET_ENABLED)) : ?>
                 <script id="sidebar-recent-entries-template" type="text/template">
                     <div id="recent-entries" class="well well-small">
+                        <div class="load"></div>
                         <div class="settings"><i class="icon-move"></i></div>
 
                         <ul class="nav nav-list">
