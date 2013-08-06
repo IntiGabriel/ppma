@@ -41,7 +41,7 @@ $(function() {
             ppma.Collection.RecentEntries.fetch();
 
             // refresh last entries every 5 seconds
-            var delay   = 5000;
+            var delay   = 50000;
             var refresh = $.proxy(function() {
                 // show spinner
                 this.showSpinner();
@@ -57,7 +57,7 @@ $(function() {
             // refresh last entries after every "add" and "remove" to Entry-Collection
             this.listenToOnce(ppma.Collection.Entries, 'sync', function() {
                 this.listenTo(ppma.Collection.Entries, 'sync', function() {
-                    ppma.Collection.RecentEntries.fetch();
+                    ppma.Collection.RecentEntries.fetch({ reset: true });
                 });
                 this.listenTo(ppma.Collection.Entries, 'remove', function() {
                     ppma.Collection.RecentEntries.fetch();
@@ -78,7 +78,7 @@ $(function() {
                 entry.data('id', model.id);
 
                 // add to dom
-                this.$el.find('li.nav-header').after(entry);
+                this.$el.find('li:last').after(entry);
             }, this))
         },
 
