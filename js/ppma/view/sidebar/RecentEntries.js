@@ -57,7 +57,7 @@ $(function() {
             // refresh last entries after every "add" and "remove" to Entry-Collection
             this.listenToOnce(ppma.Collection.Entries, 'sync', function() {
                 this.listenTo(ppma.Collection.Entries, 'sync', function() {
-                    ppma.Collection.RecentEntries.fetch({ reset: true });
+                    ppma.Collection.RecentEntries.fetch();
                 });
                 this.listenTo(ppma.Collection.Entries, 'remove', function() {
                     ppma.Collection.RecentEntries.fetch();
@@ -67,19 +67,35 @@ $(function() {
 
 
         refresh: function(collection) {
-            this.$el.find('li').not('.nav-header').remove();
+            //this.$el.find('li').not('.nav-header').remove();
             this.hideSpinner();
 
-            _.each(collection.models, $.proxy(function(model) {
+            // get models and reverse the ordering
+            var addedModels   = _.difference(collection.models, this.$el.data('models')).reverse();
+            var deletedModels = _.difference(this.$el.data('models'), collection.models);
+
+            // save models
+            this.$el.data('models', _.clone(collection.models));
+
+            // remove deleted models
+            _.each(deletedModels, $.proxy(function(model) {
+                this.$el.find('li[rel=' + model.id + ']').remove();
+            }, this));
+
+            // add new models
+            _.each(addedModels, $.proxy(function(model) {
                 // render to <li>
                 var entry = $( this._rowTemplate(model.toJSON()) );
 
-                // add id
+                // save id
                 entry.data('id', model.id);
+                entry.attr('rel', model.id);
 
                 // add to dom
-                this.$el.find('li:last').after(entry);
-            }, this))
+                this.$el.find('li:first').after(entry);
+            }, this));
+
+
         },
 
 
