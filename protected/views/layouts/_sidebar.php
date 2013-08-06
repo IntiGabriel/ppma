@@ -40,8 +40,6 @@
                         </ul>
 
                     </div>
-
-                    <?php //$this->widget('ext.RecentEntriesWidget.RecentEntriesWidget') ?>
                 </script>
 
                 <script id="sidebar-recent-entries-row-template" type="text/template">

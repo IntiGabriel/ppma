@@ -17,6 +17,8 @@
  * @property int     $categoryId
  *
  * @property Category $category
+ *
+ * @method Entry orderByIdDesc()
  */
 class Entry extends CActiveRecord
 {
@@ -231,6 +233,22 @@ class Entry extends CActiveRecord
             array('viewCount', 'unsafe'),
         );
     }
+
+
+    /**
+     * @return array
+     */
+    public function scopes()
+    {
+        $alias = $this->getTableAlias();
+
+        return array(
+            'orderByIdDesc' => array(
+                'order' => sprintf('%s.id DESC', $alias)
+            ),
+        );
+    }
+
 
     /**
      * @return CActiveDataProvider

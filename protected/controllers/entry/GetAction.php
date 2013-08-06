@@ -4,11 +4,30 @@
 class GetAction extends CAction
 {
 
-    public function run()
-    {
-        $models   = Entry::model()->findAll();
-        $response = new Response();
 
+    protected function all()
+    {
+        $c        = new CDbCriteria();
+        $c->order = 'id DESC';
+
+        $this->response($c);
+    }
+
+
+    protected function recent()
+    {
+        $c        = new CDbCriteria();
+        $c->order = 'id DESC';
+        $c->limit = Setting::model()->name(Setting::RECENT_ENTRIES_WIDGET_COUNT)->find()->value;
+
+        $this->response($c);
+    }
+
+
+    protected function response(CDbCriteria $c)
+    {
+        $models             = Entry::model()->findAll($c);
+        $response           = new Response();
         $returnedAttributes = array(
             'id',
             'name',
@@ -36,6 +55,21 @@ class GetAction extends CAction
         }
 
         $response->send();
+    }
+
+
+    public function run()
+    {
+        $params = explode('/', Yii::app()->request->queryString);
+
+        if (isset($params[2]) && $params[2] == 'recent')
+        {
+            $this->recent();
+        }
+        else
+        {
+            $this->all();
+        }
     }
 
 }

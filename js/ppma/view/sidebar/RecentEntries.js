@@ -13,20 +13,45 @@ $(function() {
         },
 
 
-        add: function(model) {
-            // render to <li>
-            var entry = $( this._rowTemplate(model.toJSON()) );
+        initialize: function() {
+            this.listenTo(ppma.Collection.RecentEntries, 'sync', this.refresh);
 
-            // add id
-            entry.data('id', model.id);
+            // fetch last entries
+            ppma.Collection.RecentEntries.fetch();
 
-            // add to dom
-            this.$el.find('ul').append(entry);
+            // refresh last entries every 5 seconds
+            var delay   = 5000;
+            var refresh = function() {
+                ppma.Collection.RecentEntries.fetch();
+                _.delay(refresh, delay);
+            }
+            _.delay(refresh, delay);
+
+            // refresh last entries after every "add" and "remove" to Entry-Collection
+            this.listenToOnce(ppma.Collection.Entries, 'sync', function() {
+                this.listenTo(ppma.Collection.Entries, 'sync', function() {
+                    ppma.Collection.RecentEntries.fetch();
+                });
+                this.listenTo(ppma.Collection.Entries, 'remove', function() {
+                    ppma.Collection.RecentEntries.fetch();
+                })
+            })
         },
 
 
-        initialize: function() {
-            this.listenTo(ppma.Collection.Entries, 'add', this.add);
+        refresh: function(collection) {
+            this.$el.find('li').not('.nav-header').remove();
+
+            _.each(collection.models, $.proxy(function(model) {
+                // render to <li>
+                var entry = $( this._rowTemplate(model.toJSON()) );
+
+                // add id
+                entry.data('id', model.id);
+
+                // add to dom
+                this.$el.find('li.nav-header').after(entry);
+            }, this))
         },
 
 
