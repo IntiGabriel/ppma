@@ -42,8 +42,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><?php echo CHtml::link('<i class="icon-list-alt"></i> Overview', array('entry/index')) ?></li>
-                            <li><?php echo CHtml::link('<i class="icon-plus-sign"></i> Create', array('entry/create'),
+                            <li><?php echo CHtml::link('<i class="icon-list-alt"></i> Overview', '#entries') ?></li>
+                            <li><?php echo CHtml::link('<i class="icon-plus-sign"></i> Create', '#entry/create',
                                     array('class' => 'show-entry-modal')) ?></li>
                             <li class="divider"></li>
                             <li><?php echo CHtml::link('<i class="icon-download"></i> Export to CSV', array('export/csv')) ?></li>

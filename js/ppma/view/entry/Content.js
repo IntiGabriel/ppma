@@ -76,6 +76,11 @@ $(function() {
         },
 
 
+        hide: function() {
+            this.$el.hide();
+        },
+
+
         initialize: function() {
             // add shortcut
             Mousetrap.bind('alt+c', $.proxy(this.create, this));
@@ -85,11 +90,13 @@ $(function() {
 
             // render view
             this.$el.append( this.views.index.render().el );
+        },
 
+
+        show: function() {
             // show content
             this.$el.fadeIn('slow');
         }
-
 
     });
 

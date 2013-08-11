@@ -9,6 +9,4 @@ $(function() {
     ppma.View.Settings = {};
     ppma.View.Sidebar  = {};
 
-
-
 });

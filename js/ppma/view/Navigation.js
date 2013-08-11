@@ -6,7 +6,7 @@ $(function() {
         el: '#navigation',
 
         events: {
-            'click .show-entry-modal':    function() { ppma.View.Entry.Content.create(); return false; },
+            'click .show-entry-modal':    function() { ppma.View.Entry.Content.create(); },
             'click .show-password-modal': function() { ppma.View.Settings.Modal.show(); return false; }
         },
 

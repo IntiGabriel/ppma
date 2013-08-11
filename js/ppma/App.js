@@ -9,14 +9,6 @@ $(function() {
     'use strict';
 
     // @TODO move to an own class
-    /*
-    $('aside').sortable({
-        containerSelector: 'aside',
-        itemSelector: '.well',
-        placeholder: '<div>placeh</div>'
-    });
-    */
-
     $( 'aside' ).sortable({
         handle: '.icon-move',
         revert: true,
@@ -25,7 +17,37 @@ $(function() {
     });
 
 
-    // fetch all entries
-    ppma.Collection.Entries.fetch();
+    var App = Backbone.Router.extend({
+
+        routes: {
+            'categories': 'categories',
+            'entries':    'entries',
+            '*path':      'default'
+        },
+
+
+        categories: function() {
+
+        },
+
+
+        default: function() {
+            this.navigate('entries');
+        },
+
+
+        entries: function() {
+            ppma.Collection.Entries.fetch();
+            ppma.View.Entry.Content.show();
+        },
+
+
+        initialize: function() {
+            Backbone.history.start();
+        }
+
+    });
+
+    ppma.App = new App();
 
 });
