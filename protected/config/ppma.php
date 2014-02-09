@@ -9,6 +9,6 @@ return array (
     'name' => 'ppma',
   ),
   'timezone' => 'UTC',
-  'isInstalled' => true,
+  'isInstalled' => false,
   'version' => '0.3.5.1',
 );
